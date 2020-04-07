@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Section;
 
 class SectionController extends Controller
 {
@@ -14,6 +15,12 @@ class SectionController extends Controller
     public function index()
     {
         //
+    }
+
+    public function get() 
+    {
+        $sections = Section::get();
+        return json_encode($sections);
     }
 
     /**
