@@ -1,18 +1,21 @@
 <template>
     <div class="catalog">
+        <h1>{{title}}</h1>
+        <div class="catalog-content">
         <catalog-item
-            v-for="product in products" 
+            v-for="product in PRODUCTS" 
             :key="product.id"
             :product_data="product"
-            @sendId="showChildren"
+            @addToCart="addToCart"
         />
+        </div>
     </div>
 </template>
 
 <script>
 
 import CatalogItem from './catalog-item'
-import axios from 'axios'
+import {mapActions, mapGetters} from 'vuex'
 export default {
     name: 'catalog',
     components: {
@@ -24,27 +27,31 @@ export default {
     data() {
         return {
             products: [],
+            title: 'Catalog'
         }
+    },
+    computed: {
+        ...mapGetters([
+            'PRODUCTS'
+        ])
     },
     mounted() {
-        this.getProducts();
+        this.GET_PRODUCTS_FROM_DB();
     },
     methods: {
-        getProducts () {
-            axios.get('http://rozetka.test/api/products').then((response) => {
-                console.log(response.data)
-                this.products = response.data
-            })
+        ...mapActions([
+            'GET_PRODUCTS_FROM_DB',
+            'ADD_TO_CART'
+        ]),
+         addToCart(data) {
+            this.ADD_TO_CART(data)
         },
-        showChildren(data) {
-            console.log(data)
-        }
     }
 }
 </script>
 
 <style>
-.catalog {
+.catalog-content {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;

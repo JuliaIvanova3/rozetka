@@ -1,19 +1,15 @@
 <template>
   <div id="app">
-    <main-header/>
-    <p> Hello World! </p>
     <main-wrapper/>
   </div>
 </template>
 
 <script>
 import MainWrapper from './components/main-wrapper.vue' 
-import MainHeader from './components/main-header.vue'
 export default {
   name: 'App',
   components: {
-   MainWrapper,
-   MainHeader
+   MainWrapper
   },
   mounted() {
     console.log("iam mounted")

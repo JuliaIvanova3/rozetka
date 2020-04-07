@@ -1,31 +1,46 @@
 <template>
     <div class="main-wrapper">
-        {{title}}
-        <catalog/>
+        <main-header class="static-element"/>
+        <div class="main-wrapper-content">
+        <keep-alive>
+            <router-view>
+            </router-view>
+        </keep-alive>
+        </div>
+         <main-footer class="static-element"/>
     </div>
 </template>
 
 <script>
+import MainHeader from './main-header'
+import MainFooter from './main-footer.vue'
 
-import Catalog from './catalog'
+
 export default {
     name: 'main-wrapper',
     components: {
-       Catalog
+       MainHeader,
+       MainFooter,
     },
     data() {
         return {
-            title: 'Main wrapper'
         }
     },
     mounted() {
+    },
+    computed: {
     }
 }
 </script>
 
 <style >
  .main-wrapper {
-     max-width: 1200px;
-     margin: 0 auto;
+    max-width: 1600px;
+    margin: 0 auto;
  }
+ .main-wrapper-content {
+     max-width: 1200px;
+    margin: 0 auto;
+ }
+ 
 </style>

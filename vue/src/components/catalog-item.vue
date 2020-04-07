@@ -3,7 +3,10 @@
         <img class="catalog-item-image" :src="require('../assets/img/' + product_data.image)" alt="img">
         <p class="catalog-item-title"> {{product_data.title}} </p>
         <p class="catalog-item-price"> Price: {{product_data.price}} $ </p>
-        <button class="catalog-item_add bth" @click="sendDataToParent"> Add to cart</button>
+        <button class="catalog-item_add btn btn-secondary" 
+            @click="addToCart"
+        > Add to cart
+        </button>
     </div>
 </template>
 
@@ -27,16 +30,19 @@ export default {
 
     },
     methods: {
-        sendDataToParent() {
-            this.$emit('sendId', this.product_data.id)
+        addToCart() {
+            this.$emit('addToCart', this.product_data)
         }
+    },
+    mounted() {
+        this.$set(this.product_data, 'quantity', 1)
     }
 }
 </script>
 
 <style>
 .catalog-item{ 
-    flex-basis: 25%;
+    flex-basis: 27%;
     box-shadow: 0 0 8px 0;
     padding: 16px;
     margin-bottom: 16px;
