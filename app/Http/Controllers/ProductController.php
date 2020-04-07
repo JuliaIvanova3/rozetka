@@ -22,7 +22,7 @@ class ProductController extends Controller
     public function get(Request $request)
     {
         $products = Product::get();
-        return response()->json($products);
+        return json_encode($products);
     }
     /**
      * Show the form for creating a new resource.
