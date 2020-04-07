@@ -15,7 +15,7 @@
         <card-component></card-component>
     </div>
     <div class="col-md-12">
-        <footer-component> </footer-component>
+        <footer-component></footer-component>
     </div>
   </div>
 </div>

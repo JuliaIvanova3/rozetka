@@ -64,3 +64,9 @@ export default {
     
 }
 </script>
+
+<style scoped>
+div {
+    padding-block: 10px !important;
+}
+</style>
