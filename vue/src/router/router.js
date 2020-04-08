@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import Catalog from '../components/catalog/catalog'
 import Cart from '../components/cart/cart'
 import Category from '../components/category/category'
+import productsPage from '../components/products/products-page'
 
 Vue.use(Router);
 
@@ -25,6 +26,12 @@ let router = new Router( {
             name: 'category',
             component: Category,
             props: true
+        },
+        {
+            path: '/products',
+            name: 'products',
+            component: productsPage
+
         }
     ]
 })

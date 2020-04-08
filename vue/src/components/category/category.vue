@@ -11,6 +11,7 @@
             v-for="category in filteredCategories"
             :key="category.id"
             :category_data="category"
+            @categoryClick="categoryGetProducts"
         />
         </div>
     </div>
@@ -70,6 +71,9 @@ export default {
             })
             this.selected = option.title
             
+        },
+        categoryGetProducts(category) {
+            this.$router.push({name: 'products', query: {'categoryId' : category}})
         }
     },
     mounted() {

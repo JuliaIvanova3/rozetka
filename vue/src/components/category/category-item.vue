@@ -1,5 +1,5 @@
 <template>
-    <div class="category-item">
+    <div class="category-item" @click="categoryClick">
         <img class="category-item-image" :src="require('../../assets/img/category/' + category_data.id + '.jpg')" alt="img">
         <p> {{category_data.title}} </p>
         <p> {{category_data.section_id}} </p>
@@ -21,7 +21,11 @@ export default {
         return {}
     },
     computed: {},
-    methods: {},
+    methods: {
+        categoryClick() {
+            this.$emit('categoryClick', this.category_data.id)
+        }
+    },
     mounted() {}
 }
 </script>
