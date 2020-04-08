@@ -14,19 +14,15 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Catalog
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
+                   <button class="catalog btn btn-secondary" 
+                        @click="goToCatalog"
+                    > Catalog
+                    </button>
                 </li>
             </ul>
 
-            <div class="input-group mb-3">
+
+            <div class="input-group sm">
             <input type="text" class="form-control" placeholder="What are you looking for ...." aria-label="Recipient's username" aria-describedby="button-addon2">
             <div class="input-group-append">
                 <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
@@ -52,7 +48,7 @@
                 </router-link>
             </li>
             <li class="nav-item">
-                <a class="nav-link">
+                 <a class="nav-link">
                 <p> {{CART.length}} </p>
                  </a>
             </li>
@@ -65,17 +61,23 @@
 
 import {mapGetters} from 'vuex'
 
+
 export default {
     name: 'main-header',
     data() {
         return {
-            title: 'rozetka'
+            title: 'rozetka',
         }
     },
     computed: {
         ...mapGetters([
-            'CART'
+            'CART',
         ])
+    },
+    methods: {
+        goToCatalog() {
+            this.$router.push({name: 'category'})
+        }
     }
 }
 </script>
@@ -83,6 +85,7 @@ export default {
 
 .input-group {
     margin-bottom: 0px !important;
+    width: 800px !important;
 }
 
 .link-to-cart {

@@ -16,6 +16,7 @@
 
 import CatalogItem from './catalog-item'
 import {mapActions, mapGetters} from 'vuex'
+
 export default {
     name: 'catalog',
     components: {
@@ -27,25 +28,26 @@ export default {
     data() {
         return {
             products: [],
-            title: 'Catalog'
+            title: 'Catalog',
+            selected: 'Catalog'
         }
     },
     computed: {
         ...mapGetters([
-            'PRODUCTS'
+            'PRODUCTS',
         ])
     },
     mounted() {
-        this.GET_PRODUCTS_FROM_DB();
+        this.GET_PRODUCTS_FROM_API();
     },
     methods: {
         ...mapActions([
-            'GET_PRODUCTS_FROM_DB',
+            'GET_PRODUCTS_FROM_API',
             'ADD_TO_CART'
         ]),
          addToCart(data) {
             this.ADD_TO_CART(data)
-        },
+        }
     }
 }
 </script>
