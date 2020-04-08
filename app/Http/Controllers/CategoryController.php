@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Category;
 
 class CategoryController extends Controller
 {
@@ -16,6 +17,11 @@ class CategoryController extends Controller
         //
     }
 
+    public function get() 
+    {
+        $category = Category::get();
+        return json_encode($category);
+    }
     /**
      * Show the form for creating a new resource.
      *
