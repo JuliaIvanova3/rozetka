@@ -1,6 +1,10 @@
 <template>
     <div class="catalog-item">
-        <img class="catalog-item-image" :src="require('../../assets/img/' + product_data.image)" alt="img">
+        <img 
+            class="catalog-item-image" 
+            :src="require('../../assets/img/' + product_data.image)" 
+            @click="clickProduct"
+            alt="img">
         <p class="catalog-item-title"> {{product_data.title}} </p>
         <p class="catalog-item-price"> Price: {{product_data.price}} $ </p>
         <button class="catalog-item_add btn btn-secondary" 
@@ -26,17 +30,22 @@ export default {
 
         }
     },
+     mounted() {
+        this.$set(this.product_data, 'quantity', 1)
+        
+    },
     computed: {
 
     },
     methods: {
         addToCart() {
             this.$emit('addToCart', this.product_data)
+            //console.log(this.product_data)
+        },
+        clickProduct() {
+            this.$emit('clickProduct', this.product_data.id)
         }
-    },
-    mounted() {
-        this.$set(this.product_data, 'quantity', 1)
-    }
+    } 
 }
 </script>
 

@@ -7,6 +7,7 @@
                 :key="product.id"
                 :product_data="product"
                 @addToCart="addToCart"
+                @clickProduct="openProduct"
             />
         </div>
     </div>
@@ -36,7 +37,6 @@ export default {
             this.PRODUCTS.map(function(item) {
                 if (item.category_id == vm.$route.query.categoryId ) {
                    result.push(item)
-                    //result = Object.assign(item)
                 }
             })
             return result;
@@ -49,6 +49,10 @@ export default {
         ]),
         addToCart(data) {
             this.ADD_TO_CART(data)
+            //console.log(data)
+        },
+        openProduct(product) {
+            this.$router.push({name: 'product', query: {'productId' : product}})
         }
     },
     mounted() {

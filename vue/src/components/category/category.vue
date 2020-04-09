@@ -61,7 +61,6 @@ export default {
             'GET_SECTIONS_FROM_API'
         ]),
         sortByCategories(option){
-            console.log(option.id)
             this.sortedCategories = []
             let vm = this;
             this.CATEGORIES.map(function(item) {

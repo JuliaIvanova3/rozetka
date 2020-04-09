@@ -7,6 +7,7 @@
             :key="product.id"
             :product_data="product"
             @addToCart="addToCart"
+            @clickProduct="openProduct"
         />
         </div>
     </div>
@@ -47,6 +48,9 @@ export default {
         ]),
          addToCart(data) {
             this.ADD_TO_CART(data)
+        },
+        openProduct(product) {
+            this.$router.push({name: 'product', query: {'productId' : product}})
         }
     }
 }
