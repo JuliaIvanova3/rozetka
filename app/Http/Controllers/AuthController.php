@@ -1,16 +1,13 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use Auth;
 use Validator;
 use App\User;
-
 class AuthController extends Controller
 {
     /**
-     * Register new user 
+     * Register a new user
      */
     public function register(Request $request)
     {
@@ -31,25 +28,24 @@ class AuthController extends Controller
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
         $user->save();
-        return response()->json(['status' => 'succes'], 200);
+        return response()->json(['status' => 'success'], 200);
     }
-
     /**
      * Login user and return a token
      */
     public function login(Request $request)
     {
-        $credentials  = $request->only('email', 'password');
+        $credentials = $request->only('email', 'password');
         if ($token = $this->guard()->attempt($credentials)) {
             return response()->json(['status' => 'success'], 200)->header('Authorization', $token);
         }
         return response()->json(['error' => 'login_error'], 401);
-    }
 
+    }
     /**
      * Logout User
      */
-    public function logout() 
+    public function logout()
     {
         $this->guard()->logout();
         return response()->json([
@@ -57,7 +53,6 @@ class AuthController extends Controller
             'msg' => 'Logged out Successfully.'
         ], 200);
     }
-
     /**
      * Get authenticated user
      */
@@ -69,7 +64,6 @@ class AuthController extends Controller
             'data' => $user
         ]);
     }
-
     /**
      * Refresh JWT token
      */
@@ -82,9 +76,8 @@ class AuthController extends Controller
         }
         return response()->json(['error' => 'refresh_token_error'], 401);
     }
-
     /**
-     * Return auth guard 
+     * Return auth guard
      */
     private function guard()
     {
