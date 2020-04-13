@@ -1,5 +1,8 @@
 export default {
     SET_PRODUCTS_TO_STATE: (state, products) => {
+        products.map(function(item) {
+            item.quantity = 1;
+        });
         state.products = products;
     },
     SET_SECTIONS_TO_STATE: (state, sections) => {
@@ -13,9 +16,9 @@ export default {
             let isProductExists = false;
             state.cart.map(function(item){
                 if (item.id === product.id) {
-                    console.log(item.quantity)
                     isProductExists = true
                     item.quantity++
+                   
                 }
             })
             if (!isProductExists) {
@@ -24,6 +27,11 @@ export default {
         } else {
             state.cart.push(product);
         }
+
+        console.log('Todos changed!');
+    },
+    SAVE_CART: (state) => {
+        window.localStorage.setItem('cart', JSON.stringify(state.cart));
     },
     REMOVE_FROM_CART: (state, index) => {
         state.cart.splice(index, 1);

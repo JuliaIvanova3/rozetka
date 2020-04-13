@@ -1,9 +1,9 @@
 <template>
     <div class="cart">
         <h1>Cart</h1>
-        <p v-if="!cart_data.length"> There are no products ... </p>
+        <p v-if="!CART.length"> There are no products ... </p>
         <cart-item
-            v-for="(item, index) in cart_data"
+            v-for="(item, index) in CART"
             :key="item.id"
             :cart_item_data="item"
             @deleteFromCart="deleteFromCart(index)"
@@ -20,7 +20,7 @@
 <script>
 
 import CartItem from './cart-item'
-import {mapActions} from 'vuex'
+import {mapActions, mapGetters} from 'vuex'
 
 export default {
     name: 'cart',
@@ -28,23 +28,20 @@ export default {
         CartItem
     },
     props: {
-        cart_data: {
-            type: Array,
-            default() {
-                return []
-            }
-        }
     },
     data() {
         return{}
     },
     computed: {
+        ...mapGetters([
+            'CART'
+        ]),
         cartTotalCost() {
             let result = []
 
-            if (this.cart_data.length) {
+            if (this.CART.length) {
 
-                for (let item of this.cart_data) {
+                for (let item of this.CART) {
                     result.push(item.price * item.quantity);
                 }
 

@@ -18,6 +18,10 @@
                         @click="goToCatalog"
                     > Catalog
                     </button>
+                    <button class="catalog btn btn-secondary" 
+                        @click="goToCarousel"
+                    > Carousel
+                    </button>
                 </li>
             </ul>
 
@@ -38,7 +42,7 @@
                 </a>
             </li>
             <li class="nav-item link-to-cart">
-                <router-link :to="{name: 'cart', params: {cart_data: CART}}">
+                <router-link :to="{name: 'cart'}">
                 <a class="nav-link">
                     <svg class="bi bi-inbox-fill" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M3.81 4.063A1.5 1.5 0 014.98 3.5h6.04a1.5 1.5 0 011.17.563l3.7 4.625a.5.5 0 01-.78.624l-3.7-4.624a.5.5 0 00-.39-.188H4.98a.5.5 0 00-.39.188L.89 9.312a.5.5 0 11-.78-.624l3.7-4.625z" clip-rule="evenodd"/>
@@ -58,26 +62,31 @@
 </template>
 
 <script>
-
-import {mapGetters} from 'vuex'
-
+import { mapGetters } from 'vuex'
 
 export default {
     name: 'main-header',
     data() {
         return {
-            title: 'rozetka',
+            title: 'rozetka'
         }
     },
     computed: {
         ...mapGetters([
-            'CART',
+            'CART'
         ])
     },
     methods: {
         goToCatalog() {
             this.$router.push({name: 'category'})
+        },
+        goToCarousel() {
+            this.$router.push({name: 'carousel'})
         }
+
+    },
+    mounted() {
+        console.log(this.CART)
     }
 }
 </script>

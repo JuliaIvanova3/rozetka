@@ -10,10 +10,12 @@ const actions = {...commonActions, ...apiRequest}
 
 Vue.use(Vuex)
 
+let cart = window.localStorage.getItem('cart');
+
 let store = new Vuex.Store({
     state: {
         products: [],
-        cart: [],
+        cart: cart ? JSON.parse(cart) : [],
         sections: [],
         categories: []
     },

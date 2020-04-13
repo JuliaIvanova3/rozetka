@@ -1,6 +1,7 @@
 <template>
     <div class="catalog">
         <h1>{{title}}</h1>
+       
         <div class="catalog-content">
         <catalog-item
             v-for="product in PRODUCTS" 
@@ -16,12 +17,13 @@
 <script>
 
 import CatalogItem from './catalog-item'
+
 import {mapActions, mapGetters} from 'vuex'
 
 export default {
     name: 'catalog',
     components: {
-        CatalogItem
+        CatalogItem,
     },
     props: {
 

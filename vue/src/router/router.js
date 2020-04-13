@@ -6,6 +6,7 @@ import Cart from '../components/cart/cart'
 import Category from '../components/category/category'
 import productsPage from '../components/products/products-page'
 import productPage from '../components/products/product-page'
+import mainHome from '../components/main-home'
 
 Vue.use(Router);
 
@@ -13,8 +14,8 @@ let router = new Router( {
     routes: [
         {
             path: '/',
-            name: 'catalog',
-            component: Catalog
+            name: 'home',
+            component: mainHome
         },
         {
             path: '/cart',
@@ -38,6 +39,11 @@ let router = new Router( {
             path: '/product',
             name: 'product',
             component: productPage
+        },
+        {
+            path: '/catalog',
+            name: 'catalog',
+            component: Catalog
         }
     ]
 })

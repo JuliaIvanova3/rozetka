@@ -34,7 +34,6 @@ export default {
             let vm = this
             this.PRODUCTS.map(function(item) {
                 if (item.id == vm.$route.query.productId ) {
-                    item.quantity = 1;
                     result = item;
                 }
             })

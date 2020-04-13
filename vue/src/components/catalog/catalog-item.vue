@@ -31,7 +31,6 @@ export default {
         }
     },
      mounted() {
-        this.$set(this.product_data, 'quantity', 1)
         
     },
     computed: {
@@ -40,7 +39,6 @@ export default {
     methods: {
         addToCart() {
             this.$emit('addToCart', this.product_data)
-            //console.log(this.product_data)
         },
         clickProduct() {
             this.$emit('clickProduct', this.product_data.id)
@@ -60,5 +58,9 @@ export default {
 .catalog-item-image {
     width: 200px;
     height: 200px;
+}
+
+svg {
+    left: 10px;
 }
 </style>
