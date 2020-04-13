@@ -1,5 +1,6 @@
 <template>
     <div class="main-wrapper">
+        <first-header/>
         <main-header class="static-element"/>
         <div class="main-wrapper-content">
         <keep-alive>
@@ -14,6 +15,7 @@
 
 <script>
 import MainHeader from './main-header'
+import firstHeader from './first-header'
 import mainHome from './main-home'
 import MainFooter from './main-footer.vue'
 
@@ -23,7 +25,8 @@ export default {
     components: {
        MainHeader,
        MainFooter,
-       mainHome
+       mainHome,
+       firstHeader
     },
     data() {
         return {
