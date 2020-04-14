@@ -1,9 +1,14 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <router-link :to="{name: 'home'}" class="navbar-brand">Laravel + JWT + Vue JS</router-link>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+     <ul class="nav navbar-nav d-inline-flex">
+            <li class="nav-item">
+                <ul class="list-inline-mb-0">
+                    <li class="list-inline-item"><a class="nav-link" @click="setLocale('en')">EN</a></li>
+                    <li class="list-inline-item">|</li>
+                    <li class="list-inline-item"><a class="nav-link" @click="setLocale('ru')">RU</a></li>          
+                </ul>
+            </li>
+        </ul>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto" v-if="$auth.check(1)">
           <li class="nav-item" v-for="(route, key) in routes.user" v-bind:key="route.path">
@@ -22,7 +27,7 @@
       </ul>
       <ul class="navbar-nav ml-auto" v-if="$auth.check()">
         <li class="nav-item">
-          <a class="nav-link" href="#" @click.prevent="$auth.logout()">Logout</a>
+          <a class="nav-link" href="#" @click.prevent="$auth.logout()"> {{$t('logOut')}} </a>
         </li>
       </ul>
     </div>
@@ -51,6 +56,14 @@
     },
     mounted() {
       //
+    },
+    methods: {
+      setLocale(locale) {
+        import(`../langs/${locale}.json`).then((msgs) => {
+          this.$i18n.setLocaleMessage(locale, msgs)
+          this.$i18n.locale = locale
+        })
+      }
     }
   }
 </script>

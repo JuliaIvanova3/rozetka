@@ -1,6 +1,6 @@
 <template>
     <div class="category">
-        <h1> {{title}} </h1>
+        <h1> {{$t('category')}} </h1>
         <c-select 
             :options="SECTIONS"
             :selected="selected"

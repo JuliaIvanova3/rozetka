@@ -6,10 +6,10 @@
             @click="clickProduct"
             alt="img">
         <p class="catalog-item-title"> {{product_data.title}} </p>
-        <p class="catalog-item-price"> Price: {{product_data.price}} $ </p>
+        <p class="catalog-item-price"> {{$t('price')}}: {{product_data.price}} $ </p>
         <button class="catalog-item_add btn btn-secondary" 
             @click="addToCart"
-        > Add to cart
+        > {{$t('addToCart')}}
         </button>
     </div>
 </template>

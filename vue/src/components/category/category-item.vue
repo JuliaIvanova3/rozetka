@@ -1,8 +1,7 @@
 <template>
     <div class="category-item" @click="categoryClick">
         <img class="category-item-image" :src="require('../../assets/img/category/' + category_data.id + '.jpg')" alt="img">
-        <p> {{category_data.title}} </p>
-        <p> {{category_data.section_id}} </p>
+        <p class="category_title"> {{category_data.title}} </p>
     </div>
 </template>
 
@@ -43,5 +42,8 @@ export default {
 .category-item-image{
     widows: 150px;
     height: 150px;
+}
+.category_title {
+    margin-right: 70px;
 }
 </style>

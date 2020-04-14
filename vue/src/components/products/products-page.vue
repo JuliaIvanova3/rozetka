@@ -1,6 +1,6 @@
 <template>
     <div class="products-page">
-        <h1>Products Page</h1>
+        <h1> {{$t('productsPage')}} </h1>
         <div class="products-page-content">
             <catalog-item
                 v-for="product in products" 

@@ -3,25 +3,25 @@
     <div class="container"> 
 			<div class="row">
 				<div class="col-lg-4 col-md-4 col-sm-12">
-					<h6 class="text-uppercase font-weight-bold">ДОПОМОГА</h6>
-					<p>Гарантія
-					<br/>Доставка та оплата
-					<br/>Сервісні центри 
-					<br/>Запитання та відповіді</p>
+					<h6 class="text-uppercase font-weight-bold"> {{$t('help')}} </h6>
+					<p>{{$t('guarantee')}}
+					<br/>{{$t('deliveryAndPayMent')}}
+					<br/>{{$t('serviceCenters')}}
+					<br/> {{$t('g&a')}} </p>
 				</div>
                 <div class="col-lg-4 col-md-4 col-sm-12">
-					<h6 class="text-uppercase font-weight-bold">Інформація про компанію</h6>
-					<p>Про нас
-					<br/>Умови використання сайту
-					<br/> Контакти
-					<br/>Вакансії</p>
+					<h6 class="text-uppercase font-weight-bold"> {{$t('infoOfCompany')}} </h6>
+					<p>{{$t('about')}}
+					<br/>{{$t('termsOfUse')}}
+					<br/> {{$t('contacts')}}
+					<br/> {{$t('vacancies')}} </p>
 				</div>
 				
 				<div class="col-lg-4 col-md-4 col-sm-12">
-					<h6 class="text-uppercase font-weight-bold">Графік роботи </h6>
-					<p> Пн - Сб
-					<br/>10:00 - 20:00
-					<br/> м. Кременчук
+					<h6 class="text-uppercase font-weight-bold"> {{$t('workSchedule')}} </h6>
+					<p> {{$t('days')}}
+					<br/> {{$t('hours')}}
+					<br/> {{$t('city')}}
 					<br/>+38009873525</p>
 				</div>
 			</div>

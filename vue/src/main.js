@@ -9,9 +9,10 @@ import router from './router/router'
 import Router from 'vue-router'
 import auth from './auth'
 import './assets/app.scss';
+import {i18n} from './plugins/i18n'
 
 window.Vue = Vue
-
+Vue.use(i18n)
 Vue.router = router
 Vue.use(Router)
 Vue.use(VueAxios, axios)
@@ -21,7 +22,8 @@ Vue.use(VueAuth, auth)
 Vue.config.productionTip = false
 
 new Vue({
+  i18n,
   render: h => h(App),
   store,
-  router
+  router,
 }).$mount('#app')

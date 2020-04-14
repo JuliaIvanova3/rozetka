@@ -16,20 +16,16 @@
                 <li class="nav-item dropdown">
                    <button class="catalog btn btn-secondary" 
                         @click="goToCatalog"
-                    > Catalog
-                    </button>
-                    <button class="catalog btn btn-secondary" 
-                        @click="goToCarousel"
-                    > Carousel
+                    > {{$t('catalog')}}
                     </button>
                 </li>
             </ul>
 
 
             <div class="input-group sm">
-            <input type="text" class="form-control" placeholder="What are you looking for ...." aria-label="Recipient's username" aria-describedby="button-addon2">
+            <input type="text" class="form-control" :placeholder="[[ $t('lookingFor') ]]" aria-label="Recipient's username" aria-describedby="button-addon2">
             <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
+                <button class="btn btn-outline-secondary" type="button" id="button-addon2">{{$t('search')}}</button>
             </div>
             </div>
 
@@ -80,9 +76,6 @@ export default {
         goToCatalog() {
             this.$router.push({name: 'category'})
         },
-        goToCarousel() {
-            this.$router.push({name: 'carousel'})
-        }
 
     },
     mounted() {

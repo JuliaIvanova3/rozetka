@@ -5,10 +5,10 @@
             <div class="content-product-inside">
                 <p> {{product.title}} </p>
                 <p> {{product.description}} </p>
-                <p> {{product.price}} </p>
+                <p> {{$t('price')}}: {{product.price}}$ </p>
                 <button class="catalog-item_add btn btn-secondary" 
                     @click="addToCart"
-                > Add to cart
+                > {{$t('addToCart')}}
                 </button>
             </div>
         </div>
