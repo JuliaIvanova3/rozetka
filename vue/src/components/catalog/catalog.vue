@@ -1,7 +1,10 @@
 <template>
     <div class="catalog">
-        <h1>{{title}}</h1>
-       
+        <h1>{{$t('catalog')}}</h1>
+            <notification
+                :messages="messages"
+                timeout="4000"
+            />
         <div class="catalog-content">
         <catalog-item
             v-for="product in filteredProducts" 
@@ -17,13 +20,14 @@
 <script>
 
 import CatalogItem from './catalog-item'
-
+import notification from '../notification/notification'
 import {mapActions, mapGetters} from 'vuex'
 
 export default {
     name: 'catalog',
     components: {
         CatalogItem,
+        notification
     },
     props: {
 
@@ -33,7 +37,8 @@ export default {
             //products: [],
             title: 'Catalog',
             selected: 'Catalog',
-            sortedProducts: []
+            sortedProducts: [],
+            messages: []
         }
     },
     computed: {
@@ -60,6 +65,12 @@ export default {
         },
          addToCart(data) {
             this.ADD_TO_CART(data)
+            .then(() => {
+                let timeStamp = Date.now().toLocaleString()
+                this.messages.unshift(
+                    {name: 'Product added to cart', id: timeStamp}
+                )
+            })
         },
         openProduct(product) {
             this.$router.push({name: 'product', query: {'productId' : product}})
