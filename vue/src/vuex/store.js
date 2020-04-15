@@ -14,10 +14,12 @@ let cart = window.localStorage.getItem('cart');
 
 let store = new Vuex.Store({
     state: {
+        searchValue: '',
         products: [],
         cart: cart ? JSON.parse(cart) : [],
         sections: [],
-        categories: []
+        categories: [],
+        list: []
     },
     mutations,
     actions,

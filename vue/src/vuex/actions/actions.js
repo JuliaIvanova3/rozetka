@@ -1,7 +1,16 @@
 export default {
+    GET_SEARCH_VALUE_TO_VUEX ({commit}, value) {
+        commit('SET_SEARCH_VALUE_TO_VUEX', value);
+    },
     ADD_TO_CART({commit}, product) {
         commit('SET_CART', product);
         commit('SAVE_CART');
+    },
+    ADD_TO_LIST( {commit}, product) {
+        commit('SET_LIST', product);
+    },
+    REMOVE_FROM_LIST ({commit}, product) {
+        commit('REMOVE_FROM_LIST', product);
     },
     INCREMENT_CART_ITEM({commit}, index) {
         commit('INCREMENT', index);

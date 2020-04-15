@@ -10,6 +10,7 @@ import Router from 'vue-router'
 import auth from './auth'
 import './assets/app.scss';
 import {i18n} from './plugins/i18n'
+import MenuIcon from 'vue-material-design-icons/Menu.vue';
 
 window.Vue = Vue
 Vue.use(i18n)
@@ -18,6 +19,7 @@ Vue.use(Router)
 Vue.use(VueAxios, axios)
 axios.defaults.baseURL = `http://rozetka.test/api/`
 Vue.use(VueAuth, auth)
+Vue.component('menu-icon', MenuIcon);
 
 Vue.config.productionTip = false
 

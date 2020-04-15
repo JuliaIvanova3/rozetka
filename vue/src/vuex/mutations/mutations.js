@@ -1,4 +1,7 @@
 export default {
+    SET_SEARCH_VALUE_TO_VUEX: (state, value) => {
+        state.searchValue = value;
+    },
     SET_PRODUCTS_TO_STATE: (state, products) => {
         products.map(function(item) {
             item.quantity = 1;
@@ -10,6 +13,17 @@ export default {
     },
     SET_CATEGORIES_TO_STATE: (state, categories) => {
         state.categories = categories;
+    },
+    SET_LIST: (state, product) => {
+            let count = 0;
+            state.list.map(function (item) {
+                if(item.id === product.id) {
+                    count++
+                }
+            })
+            if (!count) {
+                state.list.push(product);
+            }
     },
     SET_CART: (state, product) => {
         if ( state.cart.length) {
@@ -29,6 +43,10 @@ export default {
         }
 
         console.log('Todos changed!');
+    },
+    REMOVE_FROM_LIST: (state, product) => {
+        let index = state.list.indexOf(product)
+        console.log(index)
     },
     SAVE_CART: (state) => {
         window.localStorage.setItem('cart', JSON.stringify(state.cart));

@@ -10,5 +10,11 @@ export default {
     },
     CATEGORIES (state) {
         return state.categories;
+    },
+    LIST (state) {
+        return state.list;
+    },
+    SEARCH_VALUE (state) {
+        return state.searchValue;
     }
 }
