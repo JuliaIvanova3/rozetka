@@ -16,5 +16,11 @@ export default {
     },
     SEARCH_VALUE (state) {
         return state.searchValue;
+    },
+    ORDERS (state) {
+        return state.orders;
+    },
+    USER (state) {
+        return state.user;
     }
 }

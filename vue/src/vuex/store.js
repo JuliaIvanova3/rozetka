@@ -19,6 +19,8 @@ let store = new Vuex.Store({
         cart: cart ? JSON.parse(cart) : [],
         sections: [],
         categories: [],
+        orders: [],
+        user: {},
         list: []
     },
     mutations,

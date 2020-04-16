@@ -1,4 +1,7 @@
 export default {
+    SET_USER_TO_STATE: (state, user) => {
+        state.user = user;
+    },
     SET_SEARCH_VALUE_TO_VUEX: (state, value) => {
         state.searchValue = value;
     },
@@ -13,6 +16,9 @@ export default {
     },
     SET_CATEGORIES_TO_STATE: (state, categories) => {
         state.categories = categories;
+    },
+    SET_ORDERS_TO_STATE: (state, orders) => {
+        state.orders = orders;
     },
     SET_LIST: (state, product) => {
             let count = 0;

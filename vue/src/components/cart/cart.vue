@@ -1,6 +1,10 @@
 <template>
     <div class="cart">
         <h1>Cart</h1>
+        <modal 
+            v-if="showmModal"
+            @redirect="redirectToDashBoard"
+        />
         <p v-if="!CART.length"> There are no products ... </p>
         <cart-item
             v-for="(item, index) in CART"
@@ -11,8 +15,15 @@
             @increment="increment(index)"
         />
         <div class="cart-total">
-            <p>Total:  </p>
-            <p>{{cartTotalCost}} $</p>
+            <div class="total-text">
+                <p> {{$t('total')}}:  {{cartTotalCost}} $</p>
+            </div>
+            <div class="total-button">
+                <button 
+                    class="btn btn-secondary"
+                    @click="sendData"
+                > Check Out </button>
+            </div>
         </div>
     </div>
 </template>
@@ -20,17 +31,21 @@
 <script>
 
 import CartItem from './cart-item'
+import modal from '../popup/modal'
 import {mapActions, mapGetters} from 'vuex'
 
 export default {
     name: 'cart',
     components: {
-        CartItem
+        CartItem,
+        modal
     },
     props: {
     },
     data() {
-        return{}
+        return{
+            showmModal: false
+        }
     },
     computed: {
         ...mapGetters([
@@ -60,7 +75,9 @@ export default {
         ...mapActions([
             'DELETE_FROM_CART',
             'INCREMENT_CART_ITEM',
-            'DECREMENT_CART_ITEM'
+            'DECREMENT_CART_ITEM',
+            'SEND_CART_TO_API',
+            'GET_ORDERS_FROM_API'
         ]),
         deleteFromCart(index) {
             this.DELETE_FROM_CART(index)
@@ -70,7 +87,18 @@ export default {
         },
         increment(index) {
             this.INCREMENT_CART_ITEM(index)
+        },
+        sendData() {
+            this.SEND_CART_TO_API();
+            this.showmModal = true
+            this.GET_ORDERS_FROM_API();
+        },
+        redirectToDashBoard() {
+            this.$router.push('/dashboard');
         }
+    },
+    mounted() {
+        this.showmModal = false;
     }
 }
 </script>
@@ -83,9 +111,18 @@ export default {
     left: 0;
     padding: 12px;
     display: flex;
-    justify-content: center;
+    /* justify-content:space-between; */
     background: #26ae68;
     color: #ffffff;
     font-size: 20px;
 }
+.total-text {
+    padding: 8px;
+    margin: 8px;
+}
+.total-button {
+    padding: 8px;
+    margin: 8px;
+}
+
 </style>

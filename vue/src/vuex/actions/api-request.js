@@ -1,6 +1,19 @@
 import axios from 'axios'
 
 export default {
+    GET_USER_FROM_API({commit}) {
+        return axios('http://rozetka.test/api/auth/user', {
+            method: "GET"
+        })
+        .then ((user) => {
+            commit('SET_USER_TO_STATE', user.data.data);
+            return user;
+        })
+        .catch((error) => {
+            console.log(error);
+            return error;
+        })
+    },
     GET_PRODUCTS_FROM_API({commit}) {
         return axios('http://rozetka.test/api/products', {
             method: "GET"
@@ -40,4 +53,33 @@ export default {
             return error;
         })
     },
+    GET_ORDERS_FROM_API({commit}) {
+        return axios('http://rozetka.test/api/ordersByUser', {
+            method: 'GET'
+        })
+        .then ((orders) => {
+            commit('SET_ORDERS_TO_STATE', orders.data);
+            return orders.data;
+        })
+        .catch((error) => {
+            console.log(error);
+            return error;
+        })
+    },
+    SEND_CART_TO_API() {
+        this.state.cart.map((item) => {
+            console.log('item:', item.id)
+            console.log('quantity', item.quantity)
+
+            axios.post('http://rozetka.test/api/addOrder', {
+                productId: item.id,
+                quantProduct: item.quantity
+            })
+            .then (( response) => {
+                console.log(response.data)
+            })
+
+            window.localStorage.setItem('cart', []);
+        })
+    }
 }

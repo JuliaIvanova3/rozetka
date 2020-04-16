@@ -20,7 +20,7 @@
 <script>
 
 import CatalogItem from './catalog-item'
-import notification from '../notification/notification'
+import notification from '../popup/notification'
 import {mapActions, mapGetters} from 'vuex'
 
 export default {

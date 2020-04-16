@@ -27,4 +27,5 @@ export default {
     SAVE_CART_TO_LOCALSTORAGE({commit}) {
         commit('SAVE_CART');
     }
+
 }

@@ -19,6 +19,7 @@
 
 <script>
 
+import {mapActions, mapGetters} from 'vuex'
 
 export default {
     name: 'main-home',
@@ -26,6 +27,21 @@ export default {
         return {
         }
     },
+     computed: {
+      ...mapGetters([
+        'ORDERS',
+        'PRODUCTS'
+      ])
+    },
+    methods: {
+      ...mapActions([
+        'GET_ORDERS_FROM_API'
+      ])
+    },
+    mounted() {
+      this.GET_ORDERS_FROM_API();
+      console.log(this.PRODUCTS)
+    }
 }
 </script>
 
