@@ -23,6 +23,8 @@ header('Access-Control-Expose-Headers:Authorization');
 Route::get('products', 'ProductController@get');
 Route::get('sections', 'SectionController@get');
 Route::get('categories', 'CategoryController@get');
+Route::post('addOrder', 'OrderController@store');
+Route::get('ordersByUser', 'OrderController@getByUser');
 
 
 Route::prefix('auth')->group(function () {

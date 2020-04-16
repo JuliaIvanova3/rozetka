@@ -12,4 +12,9 @@ class Product extends Model
      * @var array
      */
     protected $fillable = ['title', 'description', 'price', 'image', 'category_id'];
+
+    public function product()
+    {
+        return $this->hasMany('App\Product');
+    }
 }
