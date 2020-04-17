@@ -27,6 +27,9 @@
       </ul>
       <ul class="navbar-nav ml-auto" v-if="$auth.check()">
         <li class="nav-item">
+            <router-link class="nav-link" :to="{path: '/dashboard'}"> Dashboard </router-link>
+        </li>
+         <li class="nav-item">
           <a class="nav-link" href="#" @click.prevent="$auth.logout()"> {{$t('logOut')}} </a>
         </li>
       </ul>

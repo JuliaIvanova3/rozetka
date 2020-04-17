@@ -67,5 +67,8 @@ export default {
         if (state.cart[index].quantity > 1) {
             state.cart[index].quantity--
         }
+    },
+    CLEAR_STATE_CART: (state) => {
+        state.cart = []
     }
 }

@@ -1,9 +1,9 @@
 <template>
-    <div class="modal-wrapper">
+    <div class="modal-wrapper" ref="modal_wrapper">
         <div class="modal">
             <div class="header">
                 <p class="header-info">Info window </p>
-                <span class="close">X</span>
+                <span class="close" @click="close">X</span>
             </div>
             <div class="content">
                 <p> {{info}} </p>
@@ -29,7 +29,18 @@ export default {
     methods: {
         redirect() {
             this.$emit('redirect');
+        },
+        close() {
+            this.$emit('close');
         }
+    },
+    mounted() {
+        let vm = this;
+      document.addEventListener('click', function (item) {
+        if (item.target === vm.$refs['modal_wrapper']) {
+          vm.close()
+        }
+      })
     }
 }
 </script>
@@ -83,6 +94,9 @@ export default {
 }
 .bth {
     margin-top: 8px !important;
+}
+.close {
+    cursor: pointer;
 }
 
 </style>

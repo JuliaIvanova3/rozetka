@@ -66,7 +66,7 @@ export default {
             return error;
         })
     },
-    SEND_CART_TO_API() {
+    SEND_CART_TO_API({commit}) {
         this.state.cart.map((item) => {
             console.log('item:', item.id)
             console.log('quantity', item.quantity)
@@ -80,6 +80,7 @@ export default {
             })
 
             window.localStorage.setItem('cart', []);
+            commit('CLEAR_STATE_CART');
         })
     }
 }

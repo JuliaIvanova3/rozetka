@@ -1,6 +1,7 @@
 <template>
     <div class="products-page">
         <h1> {{$t('productsPage')}} </h1>
+        <p v-if="!products.length"> Product in this category is absence </p>
         <div class="products-page-content">
             <catalog-item
                 v-for="product in products" 

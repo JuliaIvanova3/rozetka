@@ -65,21 +65,22 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions} from 'vuex'
 
 export default {
     name: 'main-header',
     data() {
         return {
             title: 'rozetka',
-            searchValue: ''
+            searchValue: '',
         }
     },
     computed: {
         ...mapGetters([
             'CART',
-            'SEARCH_VALUE'
-        ])
+            'SEARCH_VALUE',
+        ]),
+       
     },
     methods: {
         ...mapActions([
@@ -102,10 +103,11 @@ export default {
             if (this.$route.path !== '/catalog') {
             this.$router.push('/catalog');
             }
-        }
+        },
 
     },
     mounted() {
+        
     }
 }
 </script>

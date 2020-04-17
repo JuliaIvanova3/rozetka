@@ -26,6 +26,10 @@ export default {
     },
     SAVE_CART_TO_LOCALSTORAGE({commit}) {
         commit('SAVE_CART');
+    },
+    CLEAR_CART({commit}) {
+        commit('CLEAR_STATE_CART');
     }
+
 
 }

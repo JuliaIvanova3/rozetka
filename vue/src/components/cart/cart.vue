@@ -4,6 +4,7 @@
         <modal 
             v-if="showmModal"
             @redirect="redirectToDashBoard"
+            @close="closeModal"
         />
         <p v-if="!CART.length"> There are no products ... </p>
         <cart-item
@@ -91,10 +92,13 @@ export default {
         sendData() {
             this.SEND_CART_TO_API();
             this.showmModal = true
-            this.GET_ORDERS_FROM_API();
         },
         redirectToDashBoard() {
             this.$router.push('/dashboard');
+            this.showmModal = false;
+        },
+        closeModal() {
+             this.showmModal = false;
         }
     },
     mounted() {

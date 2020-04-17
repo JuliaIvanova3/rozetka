@@ -45,6 +45,10 @@ import userInfo from './user-info'
 </script>
 
 <style>
+.card-header {
+  background: #26ae68 !important;
+  color: white;
+}
 .dymanic-component {
   display: flex;
   flex-direction: column;
