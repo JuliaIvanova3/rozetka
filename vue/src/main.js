@@ -14,9 +14,12 @@ import 'vue-material-design-icons/styles.css';
 
 
 window.Vue = Vue
+
 Vue.use(i18n)
+
 Vue.router = router
 Vue.use(Router)
+
 Vue.use(VueAxios, axios)
 axios.defaults.baseURL = `http://rozetka.test/api/`
 Vue.use(VueAuth, auth)

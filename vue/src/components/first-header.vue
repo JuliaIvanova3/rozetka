@@ -50,10 +50,10 @@
           user: [
             { name: 'dashboard', path: 'dashboard' }
           ],
-        //   // LOGGED ADMIN
-        //   admin: [
-        //     { name: 'Dashboard', path: 'admin.dashboard' }
-        //   ]
+          // LOGGED ADMIN
+          admin: [
+            { name: 'Dashboard', path: 'admin.dashboard' }
+          ]
         }
       }
     },

@@ -10,6 +10,7 @@ import mainHome from '../components/main-home'
 import login from '../components/auth/login'
 import register from '../components/auth/register'
 import dashboard from '../components/user/dashboard'
+import adminDashboard from '../components/admin/admin-dashboard'
 
 Vue.use(Router);
 
@@ -89,7 +90,23 @@ const routes = [
             meta: {
               auth: true
             }
-        }
+        },
+        // ADMIN ROUTES
+        {
+          path: '/admin',
+          name: 'admin.dashboard',
+          component: adminDashboard,
+          meta: {
+            auth:true
+            // auth: {
+            //   roles: 1, 
+            //   redirect: {
+            //     name: 'login'
+            //   }, 
+            //   forbiddenRedirect: '/403'
+            // }
+          }
+        },
     ]
 
 const router = new Router({

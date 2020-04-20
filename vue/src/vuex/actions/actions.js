@@ -29,6 +29,10 @@ export default {
     },
     CLEAR_CART({commit}) {
         commit('CLEAR_STATE_CART');
+    },
+    ADD_FORMDATA_STATE({commit}, formData)
+    {
+        commit('SET_FORMDATA_PRODUCT', formData);
     }
 
 

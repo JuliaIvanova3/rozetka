@@ -10,6 +10,7 @@ const config = {
   router: router,
   tokenDefaultName: 'laravel-jwt-auth',
   tokenStore: ['localStorage'],
+  rolesVar: 'role',
   
   // API endpoints used in Vue Auth.
   registerData: {
@@ -20,7 +21,7 @@ const config = {
   loginData: {
     url: 'auth/login', 
     method: 'POST', 
-    redirect: '/dashboard', 
+    redirect: '', 
     fetchUser: true
   },
   logoutData: {

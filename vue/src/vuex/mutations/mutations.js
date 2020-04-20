@@ -2,8 +2,14 @@ export default {
     SET_USER_TO_STATE: (state, user) => {
         state.user = user;
     },
+    SET_USERS_TO_STATE: (state, users) => {
+        state.users = users
+    },
     SET_SEARCH_VALUE_TO_VUEX: (state, value) => {
         state.searchValue = value;
+    },
+    SET_FORMDATA_PRODUCT: (state, formData) => {
+        state.formData = formData
     },
     SET_PRODUCTS_TO_STATE: (state, products) => {
         products.map(function(item) {

@@ -23,4 +23,7 @@ export default {
     USER (state) {
         return state.user;
     },
+    USERS (state) {
+        return state.users;
+    }
 }

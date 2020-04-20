@@ -66,6 +66,19 @@ export default {
             return error;
         })
     },
+    GET_USERS_FROM_API ({commit}) {
+        return axios('http://rozetka.test/api/users', {
+            method: 'GET'
+        })
+        .then ((users) => {
+            commit('SET_USERS_TO_STATE', users.data);
+            return users;
+        })
+        .catch((error) => {
+            console.log(error);
+            return error;
+        })
+    },
     SEND_CART_TO_API({commit}) {
         this.state.cart.map((item) => {
             console.log('item:', item.id)
@@ -81,6 +94,15 @@ export default {
 
             window.localStorage.setItem('cart', []);
             commit('CLEAR_STATE_CART');
+        })
+    },
+    SEND_NEW_PRODUCT_TO_API () {
+        let form =  this.state.formDataProduct
+        axios.post('http://rozetka.test/api/addProduct', {
+           form
+        })
+        .then ((response) => {
+            console.log(response.data)
         })
     }
 }

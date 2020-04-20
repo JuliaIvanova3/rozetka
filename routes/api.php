@@ -25,6 +25,8 @@ Route::get('sections', 'SectionController@get');
 Route::get('categories', 'CategoryController@get');
 Route::post('addOrder', 'OrderController@store');
 Route::get('ordersByUser', 'OrderController@getByUser');
+Route::get('users', 'UserController@getUsers');
+Route::post('addProduct', 'ProductController@store');
 
 
 Route::prefix('auth')->group(function () {

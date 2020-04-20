@@ -21,7 +21,9 @@ let store = new Vuex.Store({
         categories: [],
         orders: [],
         user: {},
-        list: []
+        list: [],
+        users: [],
+        formDataProduct: ''
     },
     mutations,
     actions,
