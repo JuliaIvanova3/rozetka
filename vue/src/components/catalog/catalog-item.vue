@@ -2,7 +2,7 @@
     <div class="catalog-item">
         <img 
             class="catalog-item-image" 
-            :src="require('../../assets/img/' + product_data.image)" 
+            :src="require('../../../../storage/app/public/uploads/' + product_data.image)" 
             @click="clickProduct"
             alt="img">
         <p class="catalog-item-title"> {{product_data.title}} </p>

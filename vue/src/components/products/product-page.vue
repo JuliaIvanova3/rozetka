@@ -1,7 +1,7 @@
 <template>
     <div class="product-page">
         <div class="product-page-content">
-            <img v-if="product.image" class="product-page-image" :src="require('../../assets/img/' + product.image)" alt="img">
+            <img v-if="product.image" class="product-page-image" :src="require('../../../../storage/app/public/uploads/' + product.image)" alt="img">
             <div class="content-product-inside">
                 <p> {{product.title}} </p>
                 <p> {{product.description}} </p>

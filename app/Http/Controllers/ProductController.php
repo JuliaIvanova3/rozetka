@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
+use App\Category;
 
 class ProductController extends Controller
 {
@@ -14,7 +15,14 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::get()->toArray();
+        $products = Product::get();
+        $answers = array();
+        $category = null;
+        foreach($products as $product) {
+            $category = Category::select('title')->find($product->category_id);
+            $product->category = $category;
+
+        }
         return  response()->json($products);
     }
 
@@ -22,7 +30,15 @@ class ProductController extends Controller
     public function get(Request $request)
     {
         $products = Product::get();
-        return json_encode($products);
+        $answers = array();
+        $category = null;
+        foreach($products as $product) {
+            $category = Category::select('title')->find($product->category_id);
+            $category_title = $category->title;
+            $product->category = $category_title;
+
+        }
+        return  response()->json($products);
     }
     /**
      * Show the form for creating a new resource.
@@ -42,15 +58,34 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'image' => 'required',
+            'category_id' => 'required',
+        ]);
+
+        if ($validatedData->fails()) {
+            return response()->json($validatedData->errors(), 422);
+        }
+        
+        $last = Product::select('id')->latest('id')->first()->toArray();
+        $lastId = $last['id'];
+        $lastId++;
         $product = new Product();
         $product->title = $request->input('title');
         $product->description = $request->input('description');
         $product->price = $request->input('price');
-        $product->image = $request->input('image');
+        $fileName = $lastId.'.'.$request->file('image')->getClientOriginalExtension();
+        $product->image = $fileName;
         $product->category_id = $request->input('category_id');
         $product->save();
+        $file = $request->file('image')->storeAs('/uploads', $fileName, [
+            "disk" => 'public'
+        ]);
 
-        return json_encode($product->id);
+        return json_encode($product);
     }
 
     /**
@@ -84,7 +119,16 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $product = Product::find($id);
+
+        $product->title = $request->input('title');
+        $product->description = $request->input('description');
+        $product->price = $request->input('price');
+        $product->image = $request->input('image');
+        $product->category_id = $request->input('category_id');
+        $product->save();
+
+        return json_encode($product);
     }
 
     /**
@@ -95,6 +139,14 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
+    }
+
+    public function delete(Request $request) 
+    {
+        $id = $request->input('id');
+        Product::destroy($id);
+
+        return json_encode($id);
     }
 }

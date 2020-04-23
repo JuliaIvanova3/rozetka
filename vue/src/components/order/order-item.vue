@@ -1,7 +1,7 @@
 <template>
     <div class="order-item-wrapper">
         <div class="order-item">
-            <img class="cart-item-image" :src="require('../../assets/img/' + item_data.image)" alt="img">
+            <img class="cart-item-image" :src="require('../../../../storage/app/public/uploads/' + item_data.image)" alt="img">
             <p> Title product: {{item_data.title}}  </p>
             <p> Price: {{item_data.price}} $ </p>
             <p>Quantity: {{item_data.quantity}}  </p>

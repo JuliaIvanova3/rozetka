@@ -27,6 +27,10 @@ Route::post('addOrder', 'OrderController@store');
 Route::get('ordersByUser', 'OrderController@getByUser');
 Route::get('users', 'UserController@getUsers');
 Route::post('addProduct', 'ProductController@store');
+Route::post('deleteProduct', 'ProductController@delete');
+Route::post('updateProduct/{id}', 'ProductController@update');
+Route::post('destroyUser/{id}', 'UserController@destroy');
+Route::post('updateUser/{id}', 'UserController@update');
 
 
 Route::prefix('auth')->group(function () {

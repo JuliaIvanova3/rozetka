@@ -90,7 +90,10 @@ export default {
         SEARCH_VALUE() {
             console.log('Данные изменились:', this.SEARCH_VALUE)
         this.sortProductsBySearchValue(this.SEARCH_VALUE);
-      }
+      },
+    //   PRODUCTS() {
+    //        this.GET_PRODUCTS_FROM_API();
+    //   }
     },
     mounted() {
         this.GET_PRODUCTS_FROM_API();

@@ -26,7 +26,10 @@
           </li>
       </ul>
       <ul class="navbar-nav ml-auto" v-if="$auth.check()">
-        <li class="nav-item">
+        <li class="nav-item" v-if="isAdmin">
+            <router-link class="nav-link" :to="{path: '/admin'}"> AdminDashboard </router-link>
+        </li>
+        <li class="nav-item" v-else >
             <router-link class="nav-link" :to="{path: '/dashboard'}"> Dashboard </router-link>
         </li>
          <li class="nav-item">
@@ -37,6 +40,9 @@
   </nav>
 </template>
 <script>
+
+import axios from 'axios'
+
   export default {
     data() {
       return {
@@ -52,13 +58,18 @@
           ],
           // LOGGED ADMIN
           admin: [
-            { name: 'Dashboard', path: 'admin.dashboard' }
+            { name: 'admin.dashboard', path: 'admin' }
           ]
-        }
+        },
+        isAdmin: false
       }
     },
+    computed: {
+      
+    },
     mounted() {
-      //
+      //this.dashboard();
+      console.log(this.$auth.user())
     },
     methods: {
       setLocale(locale) {
@@ -66,8 +77,14 @@
           this.$i18n.setLocaleMessage(locale, msgs)
           this.$i18n.locale = locale
         })
+      },
+      dashboard() {
+        axios.get('http://rozetka.test/api/auth/user')
+        .then((response) => {
+          console.log(response.data)
+        })
       }
-    }
+     }
   }
 </script>
 
