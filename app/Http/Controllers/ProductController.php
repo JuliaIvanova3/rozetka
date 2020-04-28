@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Category;
+use App\Section;
 
 class ProductController extends Controller
 {
@@ -33,9 +34,15 @@ class ProductController extends Controller
         $answers = array();
         $category = null;
         foreach($products as $product) {
-            $category = Category::select('title')->find($product->category_id);
+            $category = Category::find($product->category_id);
             $category_title = $category->title;
             $product->category = $category_title;
+            $section_id = $category->section_id;
+            $product->section_id = $section_id;
+            $section = Section::select('title')->find($section_id);
+            //$section_title = $section->title;
+            $product->section = $section->title;
+            
 
         }
         return  response()->json($products);
