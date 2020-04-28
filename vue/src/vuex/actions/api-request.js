@@ -96,7 +96,8 @@ export default {
             commit('CLEAR_STATE_CART');
         })
     },
-    SEND_NEW_PRODUCT_TO_API () {
+    SEND_NEW_PRODUCT_TO_API ({commit}, formData) {
+        commit('SET_FORMDATA_PRODUCT', formData);
         let form =  this.state.formDataProduct
         axios.post('http://rozetka.test/api/addProduct', {
            form

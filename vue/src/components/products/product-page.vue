@@ -5,7 +5,7 @@
             <div class="content-product-inside">
                 <p> {{product.title}} </p>
                 <p> {{product.description}} </p>
-                <p> {{$t('price')}}: {{product.price}}$ </p>
+                <p> {{$t('price')}}: {{product.price |toFix | formattedPrice}} </p>
                 <button class="catalog-item_add btn btn-secondary" 
                     @click="addToCart"
                 > {{$t('addToCart')}}
@@ -29,6 +29,8 @@
 
 <script>
 
+import toFix from '../../filters/toFixed'
+import formattedPrice from '../../filters/price-format'
 import {mapGetters, mapActions} from 'vuex'
 
 export default {
@@ -54,6 +56,10 @@ export default {
             })
             return result;
         }
+    },
+    filters: {
+        toFix,
+        formattedPrice
     },
     methods: {
         ...mapActions([

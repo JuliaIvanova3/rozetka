@@ -4,7 +4,7 @@
         <div class="cart-item-info">
             <p> {{cart_item_data.title}} </p>
             <p> {{cart_item_data.description}} </p>
-            <p> {{cart_item_data.price}} $ </p>
+            <p> {{cart_item_data.price |toFix | formatedPrice}} </p>
         </div>
         <div class="cart-item-quantity">
             <p> Quantity: </p>
@@ -23,6 +23,8 @@
 
 <script>
 
+import toFix from '../../filters/toFixed'
+import formatedPrice from '../../filters/price-format'
 
 export default {
     name: 'cart-item',
@@ -36,6 +38,10 @@ export default {
     },
     data() {
         return{}
+    },
+    filters: {
+        toFix,
+        formatedPrice
     },
     computed: {},
     methods: {

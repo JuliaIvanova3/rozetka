@@ -17,7 +17,7 @@
         />
         <div class="cart-total">
             <div class="total-text">
-                <p> {{$t('total')}}:  {{cartTotalCost}} $</p>
+                <p> {{$t('total')}}:  {{cartTotalCost | toFix | formatedPrice}} </p>
             </div>
             <div class="total-button">
                 <button 
@@ -33,6 +33,8 @@
 
 import CartItem from './cart-item'
 import modal from '../popup/modal'
+import toFix from '../../filters/toFixed'
+import formatedPrice from '../../filters/price-format'
 import {mapActions, mapGetters} from 'vuex'
 
 export default {
@@ -47,6 +49,10 @@ export default {
         return{
             showmModal: false
         }
+    },
+    filters: { 
+        toFix,
+        formatedPrice
     },
     computed: {
         ...mapGetters([
