@@ -4,14 +4,22 @@
         <div class="home-content">
              <div class="card card-default">
             <div class="card-header"> {{$t('homePage')}} </div>
-            <div class="card-body">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt amet tempora sint dolor nam quam quos inventore odio hic, enim beatae nulla in tenetur odit natus facere voluptas excepturi deleniti? Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur sit eligendi rem et minus dolor hic, placeat eum sequi ipsa, debitis ex magni. Hic laudantium consectetur aliquid eos fuga cumque.
-                </p>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt amet tempora sint dolor nam quam quos inventore odio hic, enim beatae nulla in tenetur odit natus facere voluptas excepturi deleniti? Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur sit eligendi rem et minus dolor hic, placeat eum sequi ipsa, debitis ex magni. Hic laudantium consectetur aliquid eos fuga cumque.
-                </p>
-                <i class="material-icons"> close </i>
+            <div class="card-body" >
+              
+                  <transition name="fade">
+                    <div class="loading" v-show="loading">
+                        <span>  <font-awesome-icon :icon="myIcon" spin />
+                             Loading </span>
+                    </div>
+                  </transition>
+               
+                <catalog-item
+                    v-for="product in products" 
+                    :key="product.id"
+                    :product_data="product"
+                />
+
+               
             </div>
         </div>
         </div>
@@ -20,12 +28,23 @@
 
 <script>
 
+import catalogItem from './catalog/catalog-item'
 import {mapActions, mapGetters} from 'vuex'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+import axios from 'axios'
 
 export default {
     name: 'main-home',
+     components: {
+      FontAwesomeIcon,
+      catalogItem
+    },
     data() {
         return {
+          myIcon: faSpinner,
+          loading: false,
+          products: [],
         }
     },
      computed: {
@@ -37,17 +56,73 @@ export default {
     methods: {
       ...mapActions([
         'GET_ORDERS_FROM_API'
-      ])
+      ]),
+      load( offset = 0) {
+        this.loading = true
+        axios.get('http://rozetka.test/api/pageProduct', {
+          params: {
+              offset: offset
+          }
+        })
+        .then ((response) => {
+          this.products = this.products.concat(response.data)
+          this.loading = false
+        })
+      }
     },
     mounted() {
       this.GET_ORDERS_FROM_API();
-      console.log(this.PRODUCTS)
+      this.load();
+
+    const eventHandler = () => {
+
+        const scrollTop = document.documentElement.scrollTop;
+
+        const viewportHeight = window.innerHeight
+
+        const totalHeight = document.documentElement.offsetHeight;
+
+        const atTheBottom = scrollTop + viewportHeight == totalHeight
+
+        if (atTheBottom) {
+
+            this.load(this.products.length);
+        }
     }
+
+      document.addEventListener('scroll', eventHandler);
+    },
 }
 </script>
 
 <style>
 .home-content {
-    margin-bottom: 16px;
+  margin-bottom: 16px;
+}
+
+.card-body {
+    display: flex !important;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px;
+    /* overflow: auto; */
+}
+
+.loading {
+  text-align: center;
+  position: absolute;
+  color: #ffffff;
+  z-index: 9;
+  background: #5c4084;
+  padding: 8px 18px;
+  border-radius: 5px;
+  left: calc(50% - 45px);
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
 }
 </style>

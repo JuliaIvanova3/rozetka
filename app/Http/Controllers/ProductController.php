@@ -14,16 +14,10 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::get();
-        $answers = array();
-        $category = null;
-        foreach($products as $product) {
-            $category = Category::select('title')->find($product->category_id);
-            $product->category = $category;
+        $products = Product::skip($request->input('offset'))->take(6)->get();
 
-        }
         return  response()->json($products);
     }
 

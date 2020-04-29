@@ -21,6 +21,7 @@ header('Access-Control-Allow-Headers:  Content-Type, X-Auth-Token, Origin, Autho
 header('Access-Control-Expose-Headers:Authorization');
 
 Route::get('products', 'ProductController@get');
+Route::get('pageProduct', 'ProductController@index');
 Route::get('sections', 'SectionController@get');
 Route::get('categories', 'CategoryController@get');
 Route::post('addOrder', 'OrderController@store');
