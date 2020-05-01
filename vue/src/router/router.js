@@ -11,6 +11,7 @@ import login from '../components/auth/login'
 import register from '../components/auth/register'
 import dashboard from '../components/user/dashboard'
 import adminDashboard from '../components/admin/admin-dashboard'
+import checkout from '../components/cart/checkout'
 
 Vue.use(Router);
 
@@ -32,6 +33,15 @@ const routes = [
                 auth: undefined
               }
         },
+        {
+          path: '/checkout',
+          name: 'checkout',
+          component: checkout,
+          props: true,
+          meta: {
+              auth: undefined
+            }
+      },
         {
             path: '/category',
             name: 'category',

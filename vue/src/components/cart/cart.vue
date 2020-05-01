@@ -19,12 +19,17 @@
             <div class="total-text">
                 <p> {{$t('total')}}:  {{cartTotalCost | toFix | formatedPrice}} </p>
             </div>
-            <div class="total-button">
+            <!-- <div class="total-button">
                 <button 
                     class="btn btn-secondary"
                     @click="sendData"
                 > Check Out </button>
-            </div>
+            </div> -->
+            <router-link :to="{name: 'checkout', params: { totalCost: cartTotalCost } }">
+            <button 
+                    class="btn btn-primary"
+                > Check Out </button>
+            </router-link>
         </div>
     </div>
 </template>
