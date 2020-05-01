@@ -27,13 +27,11 @@
 </template>
 
 <script>
-
 import catalogItem from './catalog/catalog-item'
 import {mapActions, mapGetters} from 'vuex'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
-
 export default {
     name: 'main-home',
      components: {
@@ -73,42 +71,32 @@ export default {
     mounted() {
       this.GET_ORDERS_FROM_API();
       this.load();
-
     const eventHandler = () => {
-
         const scrollTop = document.documentElement.scrollTop;
-
         const viewportHeight = window.innerHeight
-
         const totalHeight = document.documentElement.offsetHeight;
-
         const atTheBottom = scrollTop + viewportHeight == totalHeight
-
         if (atTheBottom) {
-
             this.load(this.products.length);
         }
     }
-
       document.addEventListener('scroll', eventHandler);
     },
 }
 </script>
 
-<style>
+<style scoped>
 .home-content {
   margin-bottom: 16px;
 }
-
 .card-body {
     display: flex !important;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-between !important;
     align-items: center;
     margin: 20px;
     /* overflow: auto; */
 }
-
 .loading {
   text-align: center;
   position: absolute;
