@@ -22,8 +22,8 @@ header('Access-Control-Expose-Headers:Authorization');
 
 Route::get('products', 'ProductController@get');
 Route::get('pageProduct', 'ProductController@index');
-Route::get('sections', 'SectionController@get');
-Route::get('categories', 'CategoryController@get');
+Route::get('sections', 'SectionController@index');
+Route::get('categories', 'CategoryController@index');
 Route::post('addOrder', 'OrderController@store');
 Route::get('ordersByUser', 'OrderController@getByUser');
 Route::get('users', 'UserController@getUsers');
