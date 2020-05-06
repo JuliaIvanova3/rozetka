@@ -3,10 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Services\CategoryService;
 use App\Category;
 
 class CategoryController extends Controller
 {
+    protected $categoryService;
+
+    /**
+     * Category Controller construct
+     */
+    public function __construct(CategoryService $categoryService)
+    {
+        $this->categoryService = $categoryService;
+    }
+   
     /**
      * Display a listing of the resource.
      *
@@ -14,14 +25,11 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = $this->categoryService->index();
+
+        return json_encode($categories);
     }
 
-    public function get() 
-    {
-        $category = Category::get();
-        return json_encode($category);
-    }
     /**
      * Show the form for creating a new resource.
      *

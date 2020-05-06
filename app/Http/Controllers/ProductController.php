@@ -3,12 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Services\ProductService;
 use App\Product;
 use App\Category;
 use App\Section;
+use Validator;
 
 class ProductController extends Controller
 {
+    protected $productService;
+
+    /**
+     * Product Controller construct
+     */
+    public function __construct(ProductService $productService)
+    {
+        $this->productService = $productService;
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +28,8 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        $products = Product::skip($request->input('offset'))->take(6)->get();
+        $offset = $request->input('offset');
+        $products = $this->productService->getByOffset($offset);
 
         return  response()->json($products);
     }
@@ -24,21 +37,7 @@ class ProductController extends Controller
 
     public function get(Request $request)
     {
-        $products = Product::get();
-        $answers = array();
-        $category = null;
-        foreach($products as $product) {
-            $category = Category::find($product->category_id);
-            $category_title = $category->title;
-            $product->category = $category_title;
-            $section_id = $category->section_id;
-            $product->section_id = $section_id;
-            $section = Section::select('title')->find($section_id);
-            //$section_title = $section->title;
-            $product->section = $section->title;
-            
-
-        }
+        $products = $this->productService->get();
         return  response()->json($products);
     }
     /**
@@ -59,7 +58,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
+        $validator =  Validator::make($request->all(),[
             'title' => 'required',
             'description' => 'required',
             'price' => 'required',
@@ -67,25 +66,12 @@ class ProductController extends Controller
             'category_id' => 'required',
         ]);
 
-        if ($validatedData->fails()) {
+        if ($validator->fails()) {
             return response()->json($validatedData->errors(), 422);
         }
         
-        $last = Product::select('id')->latest('id')->first()->toArray();
-        $lastId = $last['id'];
-        $lastId++;
-        $product = new Product();
-        $product->title = $request->input('title');
-        $product->description = $request->input('description');
-        $product->price = $request->input('price');
-        $fileName = $lastId.'.'.$request->file('image')->getClientOriginalExtension();
-        $product->image = $fileName;
-        $product->category_id = $request->input('category_id');
-        $product->save();
-        $file = $request->file('image')->storeAs('/uploads', $fileName, [
-            "disk" => 'public'
-        ]);
-
+        $params = $request->all();
+        $product = $this->productService->create($params);
         return json_encode($product);
     }
 
@@ -120,14 +106,8 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $product = Product::find($id);
-
-        $product->title = $request->input('title');
-        $product->description = $request->input('description');
-        $product->price = $request->input('price');
-        $product->image = $request->input('image');
-        $product->category_id = $request->input('category_id');
-        $product->save();
+        $params = $request->all();
+        $product = $this->productService->update($params, $id);
 
         return json_encode($product);
     }
@@ -138,15 +118,11 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        
-    }
-
     public function delete(Request $request) 
     {
         $id = $request->input('id');
-        Product::destroy($id);
+
+        $this->productService->delete($id);
 
         return json_encode($id);
     }

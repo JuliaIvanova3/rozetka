@@ -3,17 +3,29 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Repositories\UserRepository;
+use App\Services\UserService;
 use App\User;
-use Auth;
 
 class UserController extends Controller
 {
+    protected $userService;
+
+    /**
+     * User Controller construct
+     */
+    public function __construct(UserService $userService)
+    {
+        $this->userService = $userService;
+    }
+
     /**
      * Get all users in database
      */
     public function getUsers()
     {
-        $users = User::whereNotIn('id', [Auth::id()])->get();
+        $users = $this->userService->getUsers();
+
         return json_encode($users);
     }
 
@@ -22,12 +34,8 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::find($id);
-
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
-        $user->role = $request->input('role');
-        $user->save();
+        $params = $request->all();
+        $user = $this->userService->update($params, $id);
 
         return json_encode($user);
     }

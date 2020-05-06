@@ -3,10 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Services\SectionService;
+use App\Repositories\SectionRepository;
 use App\Section;
 
 class SectionController extends Controller
 {
+    protected $sectionService;
+    
+    /**
+     * Section Controller construct
+     */
+    public function __construct(SectionService $sectionService)
+    {
+        $this->sectionService = $sectionService;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,12 +26,8 @@ class SectionController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $sections = $this->sectionService->index();
 
-    public function get() 
-    {
-        $sections = Section::get();
         return json_encode($sections);
     }
 

@@ -3,11 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Repositories\OrderRepository;
+use App\Services\OrderService;
 use Auth;
 use App\Order;
 use App\Product;
+
 class OrderController extends Controller
 {
+    protected $orderService;
+
+    /**
+     * Order Controller construct
+     */
+    public function __construct(OrderService $orderService)
+    {
+        $this->orderService = $orderService;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -37,28 +50,15 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        $userId = Auth::id();
-        $order = new Order();
-        $order->user_id = $userId;
-        $order->product_id = $request->input('productId');
-        $order->quant_product = $request->input('quantProduct');
-        $order->save();
+        $params = $request->all();
+        $order = $this->orderService->create($params);
 
         return json_encode($order);
     }
 
     public function getByUser()
     {
-        $userId = Auth::id();
-        $orders = Order::where('user_id', $userId)->get();
-        $answers = array();
-        $product = null;
-        foreach($orders as $order) {
-            $product = Product::find($order->product_id);
-            $product->quantity=$order->quant_product;
-            $answers[] = $product;
-
-        }
+        $answers = $this->orderService->getByUser();
 
         return json_encode($answers);
     }
