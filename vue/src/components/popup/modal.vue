@@ -47,7 +47,7 @@ export default {
 
 <style>
 .modal-wrapper {
-     background: rgba(64,64,64, .4);
+    background: rgba(64,64,64, .4);
     display: flex;
     justify-content: center;
     align-items: center;

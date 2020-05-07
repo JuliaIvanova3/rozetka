@@ -1,5 +1,11 @@
 <template>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-white">
+        <dropdown-list
+            v-if="filteredValues && modal"
+            :list_data=filteredValues
+            @chooseItem="setSearchValue"
+            @closeDropdown="closeDropdown"
+        />
         <router-link :to="{name: 'home'}">
         <a class="navbar-brand">
         <svg class="bi bi-house-door" width="3em" height="3em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -23,7 +29,15 @@
 
 
             <div class="input-group sm">
-            <input type="text" class="form-control" v-model="searchValue" :placeholder="[[ $t('lookingFor') ]]" aria-label="Recipient's username" aria-describedby="button-addon2">
+            <input 
+                type="text" 
+                class="form-control input" 
+                v-model="searchValue" 
+                :placeholder="[[ $t('lookingFor') ]]" 
+                @input="onChangeValue"
+                autocomplete="off"
+                @focus="modal = true"
+            >
             <div class="input-group-append">
                 <button class="btn btn-outline-secondary" @click="clearSearchField" > 
                     <svg class="bi bi-x-circle" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -32,8 +46,8 @@
                     <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 000 .708l7 7a.5.5 0 00.708-.708l-7-7a.5.5 0 00-.708 0z" clip-rule="evenodd"/>
                     </svg>
                  </button>
-                <button class="btn btn-outline-secondary" @click="search(searchValue)" type="button" id="button-addon2">{{$t('search')}}</button>
             </div>
+            <button class="btn btn-outline-secondary" @click="search(searchValue)" type="button" id="button-addon2">{{$t('search')}}</button>
             </div>
 
             <ul class="navbar-nav ml-auto">
@@ -66,25 +80,33 @@
 
 <script>
 import { mapGetters, mapActions} from 'vuex'
+import dropdownList from './popup/dropdown-list'
 
 export default {
     name: 'main-header',
+    components: {
+        dropdownList
+    },
     data() {
         return {
             title: 'rozetka',
             searchValue: '',
+            filteredValues: [],
+            modal: false
         }
     },
     computed: {
         ...mapGetters([
             'CART',
             'SEARCH_VALUE',
+            'PRODUCTS'
         ]),
        
     },
     methods: {
         ...mapActions([
-            'GET_SEARCH_VALUE_TO_VUEX'
+            'GET_SEARCH_VALUE_TO_VUEX',
+            'GET_PRODUCTS_FROM_API'
         ]),
         goToCatalog() {
             this.$router.push({name: 'category'})
@@ -104,10 +126,31 @@ export default {
             this.$router.push('/catalog');
             }
         },
-
+        onChangeValue(){
+            if (this.searchValue.length == 0) {
+                this.filteredValues = null
+            } else if (this.searchValue.length >= 3){
+            this.filteredValues = this.PRODUCTS.filter(item => {
+                return item.title.toLowerCase().startsWith(this.searchValue.toLowerCase());
+            })
+            }
+        },
+        setSearchValue(item){
+            this.searchValue = item;
+            this.modal = false
+        },
+        closeDropdown() {
+            this.modal = false;
+        }
     },
     mounted() {
-        
+        this.GET_PRODUCTS_FROM_API();
+        this.onChangeValue();
+    },
+    watch: {
+        searchValue() {
+            this.onChangeValue();
+        }
     }
 }
 </script>
@@ -123,6 +166,13 @@ export default {
     flex-wrap: nowrap;
     justify-content: space-between;
     align-items: center;
+}
+
+.input {
+    margin:8px 0px 8px 0px;
+}
+.btn {
+    margin: 8px 0px 8px 0px !important;
 }
 
 </style>

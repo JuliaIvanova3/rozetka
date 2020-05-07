@@ -140,20 +140,21 @@ export default {
         sortBy(category) {
             let vm = this;
             this.sortedProducts = [...this.PRODUCTS]
-            // this.sortedProducts = this.sortedProducts.filter(function (item ){
-            //     return item.price >= vm.minPrice && item.price <= vm.maxPrice
-            // })
+            this.sortedProducts = this.sortedProducts.filter(function (item ){
+                return item.price >= vm.minPrice && item.price <= vm.maxPrice
+            })
 
             if (category) {
                 this.sortedProducts = this.sortedProducts.filter(function (e) {
                     vm.selectCategory == category
                     return e.category_id == category && e.price >= vm.minPrice && e.price <= vm.maxPrice
                 })
-            } else {
-                this.sortedProducts = this.sortedProducts.filter(function (e) {
-                    return  e.price >= vm.minPrice && e.price <= vm.maxPrice
-                })
-            }
+            } 
+            // else {
+            //     this.sortedProducts = this.sortedProducts.filter(function (e) {
+            //         return  e.price >= vm.minPrice && e.price <= vm.maxPrice
+            //     })
+            // }
         },
         openProduct(product) {
             this.$router.push({name: 'product', query: {'productId' : product}})
