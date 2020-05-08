@@ -12,14 +12,31 @@
                     </p>
                 </li>
                 <hr/>
-                <li class="nav-item" >
-                    <p @click="switchComponent('usersList')">
-                        <span>User</span>
+                <li class="nav-item" :class="{ active: isActive('usersList') }" @click="switchComponent('usersList')">
+                    <p  class="p-content" >
+                        <span>
+                             <span class="float-left" ><fa-icon :icon="['fa','user-friends']"  />
+                            User </span>
+                            <fa-icon :icon="['fa','angle-right']" class="float-right" />
+                        </span>
                     </p>
                 </li>
-                <li class="nav-item" >
-                    <p @click="switchComponent('productsList')">
-                        <span>Product</span>
+                <li class="nav-item"  :class="{ active: isActive('productsList') }" @click="switchComponent('productsList')">
+                    <p >
+                        <span>
+                            <span class="float-left"><fa-icon :icon="['fa','box-open']"  />
+                            Product   </span>
+                            <fa-icon :icon="['fa','angle-right']" class="float-right"/>
+                        </span>
+                    </p>
+                </li>
+                 <li class="nav-item"  :class="{ active: isActive('categoriesList') }" @click="switchComponent('productsList')">
+                    <p >
+                        <span>
+                            <span class="float-left"><fa-icon :icon="['fa','list-alt']"  />
+                            Categories   </span>
+                            <fa-icon :icon="['fa','angle-right']" class="float-right"/>
+                        </span>
                     </p>
                 </li>
             </ul>
@@ -28,6 +45,9 @@
 </template>
 
 <script>
+
+// import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
 export default {
     name: 'admin-sidebar',
     data() {
@@ -42,6 +62,13 @@ export default {
         switchComponent(data) {
             this.component = data;
             this.$emit('switch', this.component);
+        },
+        isActive (data) {
+            if (data == this.component) {
+                return true;
+            }
+
+            return false;
         }
     }
 }
@@ -58,5 +85,14 @@ hr {
     width: 100%;               
     background-color: white;
     height: 1px;
+}
+.p-content :hover {
+    background: white;
+    color: darkviolet;
+}
+
+.active {
+    background: white;
+    color: darkviolet;
 }
 </style>

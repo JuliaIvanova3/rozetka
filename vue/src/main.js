@@ -10,9 +10,7 @@ import Router from 'vue-router'
 import auth from './auth'
 import './assets/app.scss';
 import {i18n} from './plugins/i18n'
-import {library} from '@fortawesome/fontawesome-svg-core'
-import {faSpinner} from '@fortawesome/free-solid-svg-icons'
-import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
+import './icons'
 import * as VueGoogleMaps from 'vue2-google-maps'
  
 Vue.use(VueGoogleMaps, {
@@ -21,12 +19,7 @@ Vue.use(VueGoogleMaps, {
   },
 })
 
-
 window.Vue = Vue
-
-library.add(faSpinner)
- 
-Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.use(i18n)
 
