@@ -13,6 +13,13 @@ import {i18n} from './plugins/i18n'
 import {library} from '@fortawesome/fontawesome-svg-core'
 import {faSpinner} from '@fortawesome/free-solid-svg-icons'
 import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
+import * as VueGoogleMaps from 'vue2-google-maps'
+ 
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: 'AIzaSyDVz-NcpH9tiaCNPVHed4zj7w2syHzQ-go',
+  },
+})
 
 
 window.Vue = Vue

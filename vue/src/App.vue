@@ -1,15 +1,20 @@
 <template>
   <div id="app">
-    <main-wrapper/>
+     <keep-alive>
+            <router-view>
+            </router-view>
+        </keep-alive>
   </div>
 </template>
 
 <script>
-import MainWrapper from './components/main-wrapper.vue' 
+// import MainWrapper from './components/main-wrapper.vue' 
+// import adminPanel from './components/admin/admin-panel'
 export default {
   name: 'App',
   components: {
-   MainWrapper
+  //  MainWrapper,
+  //  adminPanel
   },
   mounted() {
     console.log("iam mounted")

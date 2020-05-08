@@ -1,6 +1,6 @@
 <template>
     <div class="products-lists">
-        <h3>A List of Users</h3>
+        <h3>A List of Products</h3>
         <edit-product
             v-if="shownModal"
             @close="closeModal"

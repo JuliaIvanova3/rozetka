@@ -1,23 +1,25 @@
 <template>
     <div class="main-wrapper">
-        <first-header/>
-        <main-header class="static-element"/>
-        <div class="main-wrapper-content">
-        <keep-alive>
-            <router-view>
-                <main-home/>
-            </router-view>
-        </keep-alive>
+         <div class="main-wrapper-main">
+            <first-header/>
+            <main-header class="static-element"/>
+                <div class="main-wrapper-content">
+                        <keep-alive>
+                            <router-view>
+                            </router-view>
+                        </keep-alive>
+                </div>
+            <main-footer class="static-element"/>
         </div>
-         <main-footer class="static-element"/>
     </div>
 </template>
 
 <script>
 import MainHeader from './main-header'
 import firstHeader from './first-header'
-import mainHome from './main-home'
+// import mainHome from './main-home'
 import MainFooter from './main-footer.vue'
+// import adminPanel from './admin/admin-panel'
 
 
 export default {
@@ -25,14 +27,16 @@ export default {
     components: {
        MainHeader,
        MainFooter,
-       mainHome,
-       firstHeader
+    //    mainHome,
+       firstHeader,
+    //    adminPanel
     },
     data() {
         return {
         }
     },
     mounted() {
+        
     },
     computed: {
     }

@@ -40,13 +40,28 @@
                                 </div>
                                 <div class="form-inline">
                                     <p>City</p>
-                                    <input type="text" class="form-control" v-model="cityInput">
+                                    <!-- <input type="text" class="form-control" v-model="cityInput"> -->
+                                    <select v-model="selectedCity" class="form-control mb-2 mr-sm-2">
+                                        <option  value=""> {{placeHolderCity}} </option>
+                                        <option 
+                                            v-for="city in cities"
+                                            :key="city.city"
+                                            :value="city"
+                                        > {{city.city}}
+                                        </option>
+                                    </select>
+
                                 </div>
                                 <div class="form-inline">
                                     <p>Phone</p>
-                                    <input type="text" class="form-control" v-model="phoneInput">
+                                    <input type="text" class="form-control" v-model="phoneInput" placeholder="(000) 000-00-00">
                                 </div>
                             </div>
+                             <div class="google-maps">
+                                    <google-map
+                                        :marker="selectedCity"
+                                    />
+                                </div>
                         </section>
                         <hr>
                         <section class="checkout delivery d-flex justify-content-start" >
@@ -74,7 +89,7 @@
                                         <td> {{item.price| toFix}} </td>
                                     </tr>
                                 </table>
-                                <p> <strong> Total Price:</strong> {{totalCost | toFix}} </p>
+                                <p> <strong> Total Price:</strong> {{cartTotalCost | toFix}} </p>
                             </div>
                         </section>
                         <hr>
@@ -114,6 +129,8 @@
 // import checkoutPayment from './checkout-item/checkout-payment'
 import {mapGetters, mapActions} from 'vuex'
 import toFix from '../../filters/toFixed'
+import maps from '../../maps'
+import googleMap from '../google-map'
 
 export default {
     name: 'checkout',
@@ -122,6 +139,7 @@ export default {
         // checkoutDataUser,
         // checkoutDelivery,
         // checkoutPayment
+        googleMap
     },
     data() {
         return {
@@ -134,7 +152,10 @@ export default {
             radioBtn1: 'Pickup',
             radioBtn2: 'Delivery Post',
             radioBthSelected: '',
-            errors: []
+            errors: [],
+            cities: maps.cities,
+            selectedCity: '',
+            placeHolderCity: 'Choose your city'
         }
     },
     filters: { 
@@ -151,6 +172,25 @@ export default {
                 result.push(item.title)
             })
             return result;
+        },
+        cartTotalCost() {
+            let result = []
+
+            if (this.CART.length) {
+
+                for (let item of this.CART) {
+                    result.push(item.price * item.quantity);
+                }
+
+                result = result.reduce(function (sum, el) {
+                    return sum + el
+                })
+
+                return result;
+
+            } else {
+                return 0
+            }
         }
     },
     methods: {
@@ -228,11 +268,7 @@ export default {
         }
     },
     mounted() {
-       // console.log(this.$auth.user())
-        console.log(this.totalCost.toFixed(2))
-
-        
-
+        console.log(this.cities)
         console.log(this.paypalDescription);
     }
 

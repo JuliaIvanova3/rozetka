@@ -1,14 +1,15 @@
 <template>
     <div class="container">
         <div class="card card-default">
-            <div class="card-header">Admin Dashboard</div>
+            <div class="card-header"> {{$t('adminDashboard')}} </div>
             <div class="card-body">
                 <div class="dymanic-component">
-                    <div class="dymanic-button">
+                    <!-- <div class="dymanic-button">
                         <button class="dymanic-component-button" @click="switchComponent('usersList')">Users</button>
                         <button class="dymanic-component-button" @click="switchComponent('productsList')">Products</button>
-                    </div>
+                    </div> -->
                      <div class="dymanic-component-body">
+                         
                         <keep-alive>
                             <component :is="currTabComponent"></component>
                          </keep-alive>
@@ -29,17 +30,28 @@ export default {
         productsList,
         usersList
     },
+    props: {
+        component: {
+            type: String,
+            default: () => 'usersList'
+        }
+    },
     data() {
         return {
-            currTabComponent: 'usersList'
+            currTabComponent: this.component
         }
     },
     methods: {
-        switchComponent(component) {
-            this.currTabComponent = component
+        switchComponent() {
+            this.currTabComponent = this.component
         }
     },
     mounted() {
+    },
+    watch: {
+        component() {
+            this.switchComponent();
+        }
     }
 }
 </script>

@@ -61,15 +61,20 @@ import axios from 'axios'
             { name: 'admin.dashboard', path: 'admin' }
           ]
         },
-        isAdmin: false
+        is_Admin: false
       }
     },
     computed: {
-      
+        isAdmin() {
+          if ( this.$auth.user().role === 1) {
+            return true 
+          } else {
+            return false
+          }
+        }
     },
     mounted() {
       //this.dashboard();
-      console.log(this.$auth.user())
     },
     methods: {
       setLocale(locale) {

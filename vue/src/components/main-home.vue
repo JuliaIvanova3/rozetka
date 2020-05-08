@@ -5,21 +5,18 @@
              <div class="card card-default">
             <div class="card-header"> {{$t('homePage')}} </div>
             <div class="card-body" >
-              
-                  <transition name="fade">
-                    <div class="loading" v-show="loading">
-                        <span>  <font-awesome-icon :icon="myIcon" spin />
-                             Loading </span>
-                    </div>
-                  </transition>
-               
-                <catalog-item
-                    v-for="product in products" 
-                    :key="product.id"
-                    :product_data="product"
-                />
-
-               
+              <transition name="fade">
+                <div class="loading" v-show="loading">
+                    <span>  <font-awesome-icon :icon="myIcon" spin />
+                          Loading </span>
+                </div>
+              </transition>
+            
+              <catalog-item
+                  v-for="product in products" 
+                  :key="product.id"
+                  :product_data="product"
+              />
             </div>
         </div>
         </div>
@@ -32,6 +29,7 @@ import {mapActions, mapGetters} from 'vuex'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
+
 export default {
     name: 'main-home',
      components: {

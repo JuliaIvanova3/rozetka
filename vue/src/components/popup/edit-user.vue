@@ -79,25 +79,24 @@ export default {
 
 <style>
 .modal-wrapper {
-     background: rgba(64,64,64, .4);
+    background: rgba(64,64,64, .4);
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
     right: 0;
     left: 0;
     top: 0;
     bottom: 0;
 }
 .modal {
-    position:initial;
-    top: 150px !important;
+    /* position:initial;
+    top: 150px !important; */
     right: 16px;
-    display: flex !important;
+    display: flex ;
     background: #ffffff;
     flex-direction: column !important;
-    height: 365px !important;
-    width: 800px !important;
+    height: 365px ;
+    width: 800px ;
     margin-left: 350px;
     box-shadow: 0 0 17px 0 #e7e7e7;
     border-radius: 15px 15px 15px 15px;

@@ -1,11 +1,6 @@
 <template>
     <div class="cart">
         <h1>Cart</h1>
-        <modal 
-            v-if="showmModal"
-            @redirect="redirectToDashBoard"
-            @close="closeModal"
-        />
         <p v-if="!CART.length"> There are no products ... </p>
         <cart-item
             v-for="(item, index) in CART"
@@ -19,13 +14,7 @@
             <div class="total-text">
                 <p> {{$t('total')}}:  {{cartTotalCost | toFix | formatedPrice}} </p>
             </div>
-            <!-- <div class="total-button">
-                <button 
-                    class="btn btn-secondary"
-                    @click="sendData"
-                > Check Out </button>
-            </div> -->
-            <router-link :to="{name: 'checkout', params: { totalCost: cartTotalCost } }">
+            <router-link :to="{path: '/checkout' }">
             <button 
                     class="btn btn-primary"
                 > Check Out </button>
@@ -37,7 +26,6 @@
 <script>
 
 import CartItem from './cart-item'
-import modal from '../popup/modal'
 import toFix from '../../filters/toFixed'
 import formatedPrice from '../../filters/price-format'
 import {mapActions, mapGetters} from 'vuex'
@@ -46,13 +34,11 @@ export default {
     name: 'cart',
     components: {
         CartItem,
-        modal
     },
     props: {
     },
     data() {
         return{
-            showmModal: false
         }
     },
     filters: { 
@@ -100,20 +86,8 @@ export default {
         increment(index) {
             this.INCREMENT_CART_ITEM(index)
         },
-        sendData() {
-            this.SEND_CART_TO_API();
-            this.showmModal = true
-        },
-        redirectToDashBoard() {
-            this.$router.push('/dashboard');
-            this.showmModal = false;
-        },
-        closeModal() {
-             this.showmModal = false;
-        }
     },
     mounted() {
-        this.showmModal = false;
     }
 }
 </script>
