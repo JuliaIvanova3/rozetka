@@ -214,7 +214,7 @@ export default {
                         {
                         amount: {
                             currency_code: "USD",
-                            value: this.totalCost.toFixed(2)
+                            value: this.cartTotalCost.toFixed(2)
                         }
                         }
                     ]
@@ -243,7 +243,7 @@ export default {
         checkForm () {
             this.errors = [];
 
-            if (!this.cityInput) {
+            if (!this.selectedCity) {
                 this.errors.push(" City required");
             }
 

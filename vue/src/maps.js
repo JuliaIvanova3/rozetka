@@ -11,6 +11,5 @@ export default {
         { city: "Vinnitsa", position: {lat: 49.233083, lng: 28.468217}},
         { city: "Ivano-Frankivsk ", position: {lat: 48.9215, lng: 24.70972}},
         { city: "Poltava", position: {lat: 49.589542, lng: 34.551273}},
-        { city: "Kharkiv", position: {lat: 49.988358, lng: 36.232845}},
     ]
 }
