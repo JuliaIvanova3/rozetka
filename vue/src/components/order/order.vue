@@ -2,7 +2,7 @@
     <div class="order-wrapper">
         <order-item
             v-for="order in ORDERS"
-            :key="order.id"
+            :key="order"
             :item_data="order"
         />
     </div>
