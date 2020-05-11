@@ -32,6 +32,9 @@ Route::post('deleteProduct', 'ProductController@delete');
 Route::post('updateProduct/{id}', 'ProductController@update');
 Route::post('destroyUser/{id}', 'UserController@destroy');
 Route::post('updateUser/{id}', 'UserController@update');
+Route::post('addCategory', 'CategoryController@store');
+Route::post('deleteCategory/{id}', 'CategoryController@destroy');
+Route::post('updateCategory/{id}', 'CategoryController@update');
 
 
 Route::prefix('auth')->group(function () {

@@ -48,7 +48,10 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $params = $request->all();
+        $category = $this->categoryService->create($params);
+
+        return json_encode($category);
     }
 
     /**
@@ -82,7 +85,10 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $params = $request->all();
+        $category = $this->categoryService->update($id, $params);
+
+        return json_encode($category);
     }
 
     /**
@@ -93,6 +99,8 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->categoryService->delete($id);
+
+        return $id;
     }
 }
