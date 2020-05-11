@@ -44,8 +44,8 @@
                                     <select v-model="selectedCity" class="form-control mb-2 mr-sm-2">
                                         <option  value=""> {{placeHolderCity}} </option>
                                         <option 
-                                            v-for="city in cities"
-                                            :key="city.city"
+                                            v-for="(city, index) in cities"
+                                            :key="index"
                                             :value="city"
                                         > {{city.city}}
                                         </option>
@@ -214,7 +214,7 @@ export default {
                         {
                         amount: {
                             currency_code: "USD",
-                            value: this.totalCost.toFixed(2)
+                            value: this.cartTotalCost.toFixed(2)
                         }
                         }
                     ]
@@ -243,7 +243,7 @@ export default {
         checkForm () {
             this.errors = [];
 
-            if (!this.cityInput) {
+            if (!this.selectedCity) {
                 this.errors.push(" City required");
             }
 
