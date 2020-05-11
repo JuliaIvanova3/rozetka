@@ -13,6 +13,12 @@
             :categories="propsCaterogies"
             @update="updateProduct"
         />
+        <p v-if="errors.length" class="text text-danger" >
+            <b>Please correct the indicated errors:</b>
+            <ul>
+            <li v-for="error in errors" :key="error">{{ error }}</li>
+            </ul>
+        </p>
     <button class="btn btn-secondary" v-if="showBtn" @click="showForm"> Add new product</button>
     <transition name="fade">
     <form v-if="showmForm" autocomplete="off" @submit.prevent="addProduct" method="post">
@@ -101,7 +107,8 @@ export default {
             editedImage: '',
             editedCategory: '',
             editedCategoryId: '',
-            propsCaterogies: []
+            propsCaterogies: [],
+            errors: []
         }
     },
     methods: {
@@ -116,6 +123,27 @@ export default {
             this.showBtn = false;
         },
         addProduct() {
+
+            this.errors = []
+
+            if(!this.title) {
+                this.errors.push("Title required");
+            }
+            if (!this.description) {
+                this.errors.push("Descriprion required");
+            }
+            if(!this.price) {
+                this.errors.push("Price required");
+            }
+            if(!this.file) {
+                this.errors.push("File required");
+            }
+            if(!this.selectCategory) {
+                this.errors.push("Category required");
+            }
+
+            if(!this.errors.length) {
+        
             const formData = new FormData();
             formData.append('title', this.title);
             formData.append('description', this.description);
@@ -143,6 +171,7 @@ export default {
             this.price = ''
             this.file = ''
             this.selectCategory = ''
+            }
             
         },
         handleFileUpload() {

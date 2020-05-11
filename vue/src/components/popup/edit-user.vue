@@ -77,27 +77,28 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .modal-wrapper {
     background: rgba(64,64,64, .4);
     display: flex;
     justify-content: center;
     align-items: center;
+    position: absolute;
     right: 0;
     left: 0;
     top: 0;
     bottom: 0;
 }
 .modal {
-    /* position:initial;
-    top: 150px !important; */
+    /* position:initial; */
+    top: 150px !important;
     right: 16px;
     display: flex ;
-    background: #ffffff;
     flex-direction: column !important;
-    height: 365px ;
-    width: 800px ;
+    height: 377px !important;
+    width: 450px ;
     margin-left: 350px;
+    background: #ffffff;
     box-shadow: 0 0 17px 0 #e7e7e7;
     border-radius: 15px 15px 15px 15px;
 }
@@ -111,6 +112,9 @@ export default {
     color: #ffffff;
     height: 40px;
 }
+form {
+    margin-top: 40px !important;
+}
 .header-info {
     margin-bottom: 0;
 }
@@ -123,9 +127,11 @@ export default {
     padding: 8px;
     background: #e7e7e7;
     height: 55px;
+    margin-top: 280px;
 }
 .bth {
     margin-top: 8px !important;
+    margin-bottom: 8px !important;
 }
 .close {
     cursor: pointer;

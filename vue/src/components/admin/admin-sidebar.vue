@@ -73,6 +73,7 @@ export default {
 <style>
 .admin-sidebar-wrapper {
     color: honeydew;
+    height: 100vh;
 }
 hr {
     border: 0;

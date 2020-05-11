@@ -52,10 +52,10 @@ export default {
     position: fixed;
   height: 100vh;
 } */
-.sidebar {
+/* .sidebar {
   position: fixed;
   height: 100vh;
-}
+} */
 .content {
     position: fixed;
   height: 100vh;

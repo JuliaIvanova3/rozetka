@@ -1,5 +1,6 @@
 <template>
 <div>
+    <div class="user-list-wrapper">
     <h3>A List of Users</h3>
     <edit-user 
         v-if="shownEditModal"
@@ -38,6 +39,7 @@
              </td>
         </tr>
     </table>
+    </div>
 </div>
 </template>
 
@@ -104,3 +106,9 @@ export default {
     }
 }
 </script>
+
+<style>
+.user-list-wrapper{
+    height: 100vh;
+}
+</style>

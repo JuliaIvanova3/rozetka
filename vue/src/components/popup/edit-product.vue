@@ -115,9 +115,9 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .modal-wrapper {
-     background: rgba(64,64,64, .4);
+    background: rgba(64,64,64, .4);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -128,14 +128,13 @@ export default {
     bottom: 0;
 }
 .modal {
-    position:initial;
     top: 150px !important;
     right: 16px;
     display: flex !important;
     background: #ffffff;
     flex-direction: column !important;
     height: 550px !important;
-    width: 800px !important;
+    width: 450px !important;
     margin-left: 350px;
     box-shadow: 0 0 17px 0 #e7e7e7;
     border-radius: 15px 15px 15px 15px;
@@ -157,11 +156,13 @@ export default {
     height: 450px;
     padding: 10px;
     align-content: flex-start !important;
+    margin-top: 40px;
 }
 .footer {
     padding: 8px;
     background: #e7e7e7;
     height: 55px;
+    margin-top: 450px;
 }
 .bth {
     margin-top: 8px !important;
