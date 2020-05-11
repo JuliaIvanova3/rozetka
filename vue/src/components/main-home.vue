@@ -7,7 +7,7 @@
             <div class="card-body" >
               <transition name="fade">
                 <div class="loading" v-show="loading">
-                    <span>  <fa-icon :icon="['fas', 'spinner']" spin />
+                    <span>  <font-awesome-icon :icon="myIcon" spin />
                           Loading </span>
                 </div>
               </transition>
@@ -26,17 +26,19 @@
 <script>
 import catalogItem from './catalog/catalog-item'
 import {mapActions, mapGetters} from 'vuex'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
 
 export default {
     name: 'main-home',
      components: {
-     // FontAwesomeIcon,
+      FontAwesomeIcon,
       catalogItem
     },
     data() {
         return {
-          //myIcon: faSpinner,
+          myIcon: faSpinner,
           loading: false,
           products: [],
         }
