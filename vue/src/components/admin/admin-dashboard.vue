@@ -23,12 +23,14 @@
 
 import productsList from './products-list'
 import usersList from './users-list'
+import categoriesList from './categories-list'
 
 export default {
     name: 'admin-dashboard',
     components: {
         productsList,
-        usersList
+        usersList,
+        categoriesList
     },
     props: {
         component: {

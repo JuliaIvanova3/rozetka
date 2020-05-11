@@ -30,7 +30,7 @@
                         </span>
                     </p>
                 </li>
-                <li class="nav-item"  :class="{ active: isActive('categoriesList') }" @click="switchComponent('productsList')">
+                <li class="nav-item"  :class="{ active: isActive('categoriesList') }" @click="switchComponent('categoriesList')">
                     <p class="p-content" >
                         <span>
                             <span class="float-left"><fa-icon :icon="['fa','list-alt']"  />
@@ -83,12 +83,9 @@ hr {
     background-color: white;
     height: 1px;
 }
-.p-content :hover {
-    background: white;
-    color: darkviolet;
-}
-.active {
-    background: white;
-    color: darkviolet;
+.p-content :hover, .active {
+   background: #D3D3D3;
+    color: black;
+    border-radius: 7px;
 }
 </style>
