@@ -36,7 +36,9 @@
                 <td> {{category.id}} </td>   
                 <td v-if="shownEdit != category.id"> {{category.title}} </td>   
                 
-                <td v-if="shownEdit == category.id"> <input type="text" v-model="titleEdit" class="form-control mb-2 mr-sm-2"> </td>
+                <td v-if="shownEdit == category.id"> <input type="text" v-model="titleEdit" class="form-control mb-2 mr-sm-2" :class="'title-'+ category.id"> 
+                    <div v-if="shownError" class="text-danger error"> {{titleError}}  </div>
+                </td>
 
                 <td v-if="shownEdit != category.id"> {{category.section}} </td> 
 
@@ -76,7 +78,9 @@ export default {
             shownEdit: 0,
             titleEdit: '',
             sectionEdit: '',
-            editedcategory: ''
+            editedcategory: '',
+            titleError: '',
+            shownError: false
         }
     },
     computed: {
@@ -99,13 +103,13 @@ export default {
         addCategory() {
             this.errors = [];
 
-            if (!this.titleInput) {
-                this.errors.push("Title required");
-            }
+            // if (!this.titleInput) {
+            //     this.errors.push("Title required");
+            // }
 
-            if (!this.sectionSelected) {
-                this.errors.push("Section required");
-            }
+            // if (!this.sectionSelected) {
+            //     this.errors.push("Section required");
+            // }
 
             if (!this.errors.length) {
 
@@ -124,6 +128,17 @@ export default {
                 .then ((response) => {
                     console.log(response.data)
                     this.GET_CATEGORIES_FROM_API();
+                })
+                .catch((error) =>  {
+                    const errors = error.response.data.errors
+                    // const firstItem = Object.keys(errors)[0]
+                    // const firstItemMessage = errors[firstItem][0]
+                    // errors.filter((item) => {
+                    //     const firstItem = Object.keys(item)[0]
+                    //     const firstItemMessage = item[firstItem][0]
+                    //     this.errors.push(firstItemMessage);
+                    // })
+                    console.log(errors)
                 })
 
                 this.titleInput = ''
@@ -156,6 +171,21 @@ export default {
                 this.GET_CATEGORIES_FROM_API();
                 this.shownEdit = 0
             })
+            .catch((error) =>  {
+                const errors = error.response.data.errors
+                console.log(errors)
+                const firstItem = Object.keys(errors)[0]
+                this.titleError = errors[firstItem][0]
+                this.shownError = true
+                // firstItemDOM.scrollIntoView();
+
+                // const errorsMessage = document.querySelector('.text-danger')
+                // errorsMessage.forEach((element) => element.textContent = '')
+
+                // firstItemDOM.insertAdjacentHTML('afterend',`<div class="text-danger"> ${firstItemMessage} </div>`)
+                // firstItemDOM.classList.add('border', 'border-danger')
+            })
+
         }
     },
     mounted() {
@@ -166,6 +196,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.error {
+    font-size: 12px;
+}
 </style>

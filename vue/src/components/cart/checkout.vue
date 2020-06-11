@@ -4,26 +4,16 @@
                 <div class="card card-default">
                     <div class="card-header">
                         CheckOut
-                        <!-- <ul class="nav nav-tabs card-header-tabs">
-                            <li class="nav-item">
-                                <a class="nav-link" :class="{ active: isActive('checkoutDataUser') }"  @click="switchComponent('checkoutDataUser')"> data user</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" :class="{ active: isActive('checkoutDelivery') }" @click="switchComponent('checkoutDelivery')">Delivery</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" :class="{ active: isActive('checkoutPayment') }" @click="switchComponent('checkoutPayment')">Payment</a>
-                            </li>
-                        </ul> -->
                     </div>
                     <div class="card-body">
-                        <!-- <component :is="currTabComponent"></component> -->
-                        <p v-if="errors.length" class="text text-danger" >
-                            <b>Please correct the indicated errors:</b>
-                            <ul>
-                            <li v-for="error in errors" :key="error">{{ error }}</li>
-                            </ul>
-                        </p>
+                        <div class="errors" id="errors" >
+                            <p v-if="errors.length" class="text text-danger" ref="errors">
+                                <b>Please correct the indicated errors:</b>
+                                <ul>
+                                <li v-for="error in errors" :key="error">{{ error }}</li>
+                                </ul>
+                            </p>
+                        </div>
                         <section class="checkout data-user d-flex justify-content-start">
                             <h4 class="check-step-title">
                             <span class="check-step-number">1</span>
@@ -40,7 +30,6 @@
                                 </div>
                                 <div class="form-inline">
                                     <p>City</p>
-                                    <!-- <input type="text" class="form-control" v-model="cityInput"> -->
                                     <select v-model="selectedCity" class="form-control mb-2 mr-sm-2">
                                         <option  value=""> {{placeHolderCity}} </option>
                                         <option 
@@ -105,14 +94,7 @@
                             </div>
                         </section>
                         <hr>
-                        <!-- <section class="checkout payment d-flex justify-content-start">
-                            <h4 class="check-step-title">
-                            <span class="check-step-number">4</span>
-                            <span class="check-step-title-content"> Payment </span>
-                            </h4>
-                             <div ref="paypal"></div>
-                        </section> -->
-                        <button class="btn btn-success"
+                        <button class="btn btn-success" id="pay"
                                 @click="checkForm"
                         > Pay </button>
                          <div ref="paypal"></div>
@@ -124,9 +106,6 @@
 
 <script>
 
-// import checkoutDataUser from './checkout-item/checkout-data-user'
-// import checkoutDelivery from './checkout-item/checkout-delivery'
-// import checkoutPayment from './checkout-item/checkout-payment'
 import {mapGetters, mapActions} from 'vuex'
 import toFix from '../../filters/toFixed'
 import maps from '../../maps'
@@ -136,14 +115,10 @@ export default {
     name: 'checkout',
     props:['totalCost'],
     components: {
-        // checkoutDataUser,
-        // checkoutDelivery,
-        // checkoutPayment
         googleMap
     },
     data() {
         return {
-            // currTabComponent: 'checkoutDataUser',
             nameInput: this.$auth.user().name,
             emailInput: this.$auth.user().email,
             cityInput: null,
@@ -194,12 +169,6 @@ export default {
         }
     },
     methods: {
-        // switchComponent(data) {
-        //     this.currTabComponent = data;
-        // },
-        // isActive(data) {
-        //     return this.currTabComponent === data
-        // }
         ...mapActions([
             'GET_ORDERS_FROM_API',
             'SEND_CART_TO_API'
@@ -222,7 +191,6 @@ export default {
                 },
                 onApprove: async (data, actions) => {
                     const order = await actions.order.capture();
-                    //this.paidFor = true;
                     console.log(order);
                     this.redirectToDashBoard();
                 },
@@ -257,7 +225,16 @@ export default {
 
             if (!this.errors.length) {
                 this.createPayment();
+            } else {
+               
+                this.handleButtonClick();
+            
             }
+        },
+        handleButtonClick() {
+            document.getElementById('errors').scrollIntoView({block: "center", behavior: "smooth"});
+            //  var bth = document.getElementById('pay');
+            //   bth.addEventListener('click', this.handleButtonClick);
         },
         createPayment() {
             const script = document.createElement("script");

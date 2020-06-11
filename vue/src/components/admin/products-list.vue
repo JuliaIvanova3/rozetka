@@ -126,21 +126,21 @@ export default {
 
             this.errors = []
 
-            if(!this.title) {
-                this.errors.push("Title required");
-            }
-            if (!this.description) {
-                this.errors.push("Descriprion required");
-            }
-            if(!this.price) {
-                this.errors.push("Price required");
-            }
-            if(!this.file) {
-                this.errors.push("File required");
-            }
-            if(!this.selectCategory) {
-                this.errors.push("Category required");
-            }
+            // if(!this.title) {
+            //     this.errors.push("Title required");
+            // }
+            // if (!this.description) {
+            //     this.errors.push("Descriprion required");
+            // }
+            // if(!this.price) {
+            //     this.errors.push("Price required");
+            // }
+            // if(!this.file) {
+            //     this.errors.push("File required");
+            // }
+            // if(!this.selectCategory) {
+            //     this.errors.push("Category required");
+            // }
 
             if(!this.errors.length) {
         
@@ -162,6 +162,10 @@ export default {
             .then ((response) => {
                 console.log(response.data)
                 this.GET_PRODUCTS_FROM_API();
+            })
+            .catch((error) =>  {
+                const errors = error.response.data.errors
+                console.log(errors)
             })
 
             this.showmForm = false;

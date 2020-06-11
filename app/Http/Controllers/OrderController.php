@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Repositories\OrderRepository;
 use App\Services\OrderService;
+use App\Http\Requests\StoreOrder;
 use Auth;
 use App\Order;
 use App\Product;
@@ -48,7 +49,7 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreOrder $request)
     {
         $params = $request->all();
         $order = $this->orderService->create($params);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Repositories\UserRepository;
+use App\Http\Requests\UpdateUser;
 use App\Services\UserService;
 use App\User;
 
@@ -32,7 +33,7 @@ class UserController extends Controller
     /**
      * Upadte user record
      */
-    public function update(Request $request, $id)
+    public function update(UpdateUser $request, $id)
     {
         $params = $request->all();
         $user = $this->userService->update($params, $id);

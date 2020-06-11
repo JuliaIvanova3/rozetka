@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\ProductService;
+use App\Http\Requests\ProductStore;
 use App\Product;
 use App\Category;
 use App\Section;
@@ -35,7 +36,7 @@ class ProductController extends Controller
     }
 
 
-    public function get(Request $request)
+    public function get()
     {
         $products = $this->productService->get();
         return  response()->json($products);
@@ -56,20 +57,8 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductStore $request)
     {
-        $validator =  Validator::make($request->all(),[
-            'title' => 'required',
-            'description' => 'required',
-            'price' => 'required',
-            'image' => 'required',
-            'category_id' => 'required',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json($validatedData->errors(), 422);
-        }
-        
         $params = $request->all();
         $product = $this->productService->create($params);
         return json_encode($product);
@@ -104,7 +93,7 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductStore $request, $id)
     {
         $params = $request->all();
         $product = $this->productService->update($params, $id);

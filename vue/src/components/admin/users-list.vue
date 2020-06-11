@@ -99,6 +99,10 @@ export default {
                 console.log(response)
                 this.GET_USERS_FROM_API();
             })
+            .catch((error) =>  {
+                const errors = error.response.data.errors
+                console.log(errors)
+            })
         }
     },
     mounted() {
